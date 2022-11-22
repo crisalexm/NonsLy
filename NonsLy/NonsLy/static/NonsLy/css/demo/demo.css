@@ -1,0 +1,46 @@
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+#toggler{
+    
+    border-color: white;
+} 
+#header img{
+    width: 90px; 
+}
+.bg {
+    background-image: url(../img/soporte-contacto.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 80%;
+
+
+}
+body{
+    
+    background: rgb(0, 255, 255);
+    background: linear-gradient(to right, rgb(0, 255, 255), rgb(7, 168, 243)); 
+    background-position: 50% 50%;
+    background-size: cover;
+}
+.col-md-6.ok input{
+    border: 0.1px solid;
+    border-color: #08ffc8;
+}
+.col-md-6.falla input{
+    border: 0.1px solid;
+    border-color: red;
+}
+
+.col-md-6 p{
+    visibility: hidden;
+    position: absolute;
+    font-size: small;
+    font-weight: 500;
+    text-align: end;
+}
+
+.col-md-6.falla p{
+    visibility: visible;
+    color: red;
+}

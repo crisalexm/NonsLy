@@ -1,0 +1,57 @@
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+.bg {
+    background-image: url("/static/NonsLy/img/fondo1.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 105%;
+
+}
+
+body{
+    
+    background: rgb(0, 255, 255);
+    background: linear-gradient(to right, rgb(0, 255, 255), rgb(7, 168, 243)); 
+    background-position: 50% 50%;
+    background-size: cover;
+}
+
+.col-12.ok input{
+    border: 0.1px solid;
+    border-color: #08ffc8;
+}
+.col-12.falla input{
+    border: 0.1px solid;
+    border-color: red;
+}
+
+.col-12 p{
+    visibility: hidden;
+    position: absolute;
+    font-size: small;
+    font-weight: 500;
+    text-align: end;
+}
+.col-12.falla p{
+    visibility: visible;
+    color: red;
+}
+
+.box{
+    width:100px;
+    height: 100px;
+    margin: 30px;
+    background-color: #33d;
+}
+
+.drop{
+    position:absolute;
+    top: 830px;
+    left:1100px;
+    width: 300px;
+    height: 300px;
+    border: 2px solid lightblue;
+    display: flex;
+    flex-wrap: wrap;
+}

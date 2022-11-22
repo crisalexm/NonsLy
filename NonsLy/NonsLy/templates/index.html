@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {%load static %}
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{%static 'NonsLy/css/index.css'%}">
+    <script src="https://kit.fontawesome.com/275692ffb5.js" crossorigin="anonymous"></script>
+
+    <title>NonsLy</title>
+    <!-- Font -->
+
+    <link rel="stylesheet" href="{%static 'NonsLy/css/font.css'%}">
+    <!-- /Font -->
+  </head>
+  <body  data-bs-target="navbar" data-bs-offset="60.25">
+    <!-- Header -->
+    <nav id="header" class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top" style="background: linear-gradient(to right, rgb(0, 255, 255), rgb(7, 168, 243))">
+        <div class="container"> 
+              <a class="navbar-brand" href="{%url 'index'%}">
+                <img src="{%static 'NonsLy/img/nonslytransparente.png'%}" alt="">
+              </a>
+              <button id="toggler" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#main">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#actividad">¿Qué hacemos?</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#encuentranos">Encuéntranos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{%url 'soporte'%}">Soporte</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="btn btn-outline-light me-2 mb-2" href="{%url 'demo'%}">Únete a NonsLy</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="text-decoration-none btn btn-light" href="{%url 'login'%}">Iniciar Sesión</a>
+                  </li>
+                </ul>
+              </div>
+        </div>  
+    </nav>
+    <!-- /HEADER -->
+
+    <!-- PRINCIPAL -->
+    <main id="main">
+      <div id="carousel" class="carousel slide" data-bs-ride="carousel" data-bs-pause="false">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{%static 'NonsLy/img/niñoencasa.jpg'%}" class="d-block w-100" alt="niñoencasa">
+          </div>
+          <div class="carousel-item">
+            <img src="{%static 'NonsLy/img/fondo2.png'%}" class="d-block w-100" alt="fondo2">
+          </div>
+          <div class="carousel-item">
+            <img src="{%static 'NonsLy/img/minimalismo2.gif'%}" class="d-block w-100" alt="minimalismo2.gif">
+          </div>
+        </div>
+        <div class="overlay">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-md-6 offset-md-6 text-center text-md-end"> <!-- Alineo texto para disp mas pequeños (centro texto) -->
+                <h1>RGE</h1>
+                <p class="d-none d-md-block">
+                  NonsLy es una Red de Gestión Escolar en Chile, que tiene como objetivo apoyar el proceso educativo, administrativo y pedagógico de la comunidad Escolar
+                </p>
+                <a href="{%url 'demo'%}" class="btn btn-outline-light btn-lg">Quiero NonsLy!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </main>  
+    <!-- /PRINCIPAL -->
+    <!-- TARJETAS -->
+    <section id="actividad" class="my-0 " data-bs-> <!-- Separo un poco del carousel -->
+      <div class="container">
+        <div class="row">
+          <div class="col text-center text-uppercase my-4">
+            <h2>¿Qué Hacemos?</h2>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Tarjeta 1 -->
+          <div class="col-12 col-md-6 col-lg-4 mb-4 ">
+            <div class="card">
+              <img src="{%static 'NonsLy/img/cards/nonslytransparente.png'%}" class="card-img-top" alt="...">
+              <div class="card-body shadow-lg">
+                <div class="badge offset-10">
+                  <span class="badge rounded-pill bg-info text-dark ">Info</span>
+                </div>
+                <h5 class="card-title">Empresa</h5>
+                <p id="contents_1" class="hide">Es una empresa chilena de software que se dedica al  desarrollo de software para la educación.
+                Nuestro propósito principal es, proveer y apoyar a las comunidades educacionales que no cuenten con acceso a soluciones de gestión educativas por motivos económicos, de modo que el uso y explotación permita a la organización; simplificar procesos de la operación diaria, digitalizar el acceso a clases y cursos, reducir la carga laboral y administrativa, obtener métricas e información más precisas tanto del staff, como del alumnado y proveer de una información a los apoderados respecto a los resultados de sus estudiantes, entre otras funciones. </p>
+               <button type="button" class="btn btn-outline-info" id="btnText_1" onclick="showHide(1); return false">Mostrar contenido</button>
+              </div>
+            </div>
+          </div> {% comment %}  {% endcomment %}
+          <!-- Tarjeta 2 -->
+          <div class="col-12 col-md-6 col-lg-4 mb-4 ">
+            <div class="card">
+              <img src="{%static 'NonsLy/img/cards/2.png'%}" class="card-img-top" alt="...">
+              <div class="card-body shadow-lg">
+                <div class="badge offset-10">
+                  <span class="badge rounded-pill bg-info text-dark">Info</span>
+                </div>
+                <h5 class="card-title">Red de Gestión Educativa</h5>
+                <p id="contents_2" class="hide">Red de gestión escolar proporciona a las escuelas una forma de mantener una comunicación fluida y eficaz entre todos los interesados. En definitiva, el uso de esta herramienta digital permite a los centros educativos ahorrar tiempo de gestión, lo que se traduce en un ahorro económico a través de una mejor y mejor gestión, permitiendo tomar mejores decisiones para el centro y su comunidad.</p>
+                <button type="button" class="btn btn-outline-info" id="btnText_2" onclick="showHide(2); return false">Mostrar contenido</button>
+              </div>
+            </div>
+          </div>
+          <!-- Tarjeta 3 -->
+          <div class="col-12 col-md-6 col-lg-4 mb-4 ">
+            <div class="card">
+              <img src="{%static 'NonsLy/img/minimalismo3.png'%}" class="card-img-top" alt="...">
+              <div class="card-body shadow-lg">
+                <div class="badge offset-10">
+                  <span class="badge rounded-pill bg-info text-dark">Info</span>
+                </div>
+                <h5 class="card-title">Ministerio de Educación</h5>
+                <p class="hide" id="contents_3">La Revista de Educación del Ministerio de Educación es una publicación gratuita dirigida a las comunidades educativas. En ella podrás encontrar temas relevantes para la docencia e información actualizada y detallada de los programas del Mineduc.</p>
+                <button type="button" class="btn btn-outline-info" id="btnText_3" onclick="showHide(3); return false">Mostrar contenido</button>  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /TARJETAS -->
+    <!--Encuentranos-->
+
+    <section id="encuentranos">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col text-center text-uppercase my-4 shadow-lg border-dark">
+            <h1>Encuéntranos!</h1>
+          </div>  
+        </div>
+        <div class="row ">
+          <div class="col-12 border-info text-center mb-4 mx-0 align-content-center">
+            <p>Almte. Barroso 76, Santiago, Región Metropolitana</p>
+
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.216963325832!2d-70.66670487316232!3d-33.443653519287295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c5a93f630c19%3A0xc1680441da8a20aa!2sINACAP%20Santiago%20Centro!5e0!3m2!1ses-419!2scl!4v1653865243076!5m2!1ses-419!2scl" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="d-none d-md-block  col-md-12"></iframe>
+          </div>  
+        </div>
+      </div>
+    </section>
+
+    <!--/Encuentranos-->
+    <!--Footer  -->
+    <footer id="footer" class="pb-4 pt-4">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-12 col-lg mb-4"> <!-- col-lg a partir de dispositivos grandes repartir columnas equitativamente -->
+            <a class="text-light text-decoration-none shadow-lg" href="{%url 'faq'%}">FAQs</a>
+          </div>
+          <div class="col-12 col-lg mb-4">
+            <a class="text-light text-decoration-none shadow-lg" href="{%url 'soporte'%}">Soporte</a>
+          </div>
+          <div class="col-12 col-lg mb-4"> 
+            <a class="text-light text-decoration-none shadow-lg" href="https://sige.mineduc.cl/Sige/Login">SIGE</a>
+          </div>
+          <div class="col-12 col-lg mb-4">
+            <a class="text-light text-decoration-none shadow-lg" href="https://demre.cl/">DEMRE</a>
+          </div>
+          <div class="col-12 col-lg mb-4">
+            <a class="text-light text-decoration-none shadow-lg" href="https://www.mineduc.cl/">Mineduc</a>
+          </div>
+          <div class="col-12 col-lg mb-4">
+            <a class="text-light text-decoration-none shadow-lg" href="{%url 'whoweare'%}">Conócenos</a>
+          </div>
+        </div>
+
+      </div>
+
+    </footer>
+    <a href="#" class="to-top">
+      <i class="fas fa-chevron-up"></i>
+    </a>
+    <!--/Footer  -->
+        <!--/Footer  -->
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    -->
+    <script src="{%static 'NonsLy/JQuery/jquery-3.6.0.min.js'%}"></script>
+    <script src="{%static 'NonsLy/js/index_js/leerMas.js'%}"></script>
+    <script src="{%static 'NonsLy/js/index_js/scroll.js'%}"></script>
+  </body>
+</html>

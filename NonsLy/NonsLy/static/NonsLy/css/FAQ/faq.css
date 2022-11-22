@@ -1,0 +1,26 @@
+#nonsly{
+    width: 90px; 
+} 
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+/* #accordion{
+    position: absolute;
+    width: 500px;
+    height: 200px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 30%;
+
+} */
+
+body{
+    
+    background: rgb(0, 255, 255);
+    background: linear-gradient(to right, rgb(0, 255, 255), rgb(7, 168, 243)); 
+    background-position: 50% 50%;
+    background-size: cover;
+}
