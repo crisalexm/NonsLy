@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import index, login, whoweare, soporte, faq, demo, administrador
+from gestionAcademica import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', index, name='index'),

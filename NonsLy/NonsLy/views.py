@@ -33,11 +33,13 @@ def demo(request):
 
 def administrador(request):
     
-    if request.GET["email"]:
+    #if request.GET["email"]:
         
-       mensaje="Admin: %r" %request.GET["email"]
+     #  mensaje="Admin: %r" %request.GET["email"]
     
-    else:
-        mensaje="No has ingresado nada"
+    #else:
+     #   mensaje="No has ingresado nada"
     
     return render(request,'admin/administrador.html')
+
+
