@@ -8,6 +8,13 @@
 from django.db import models
 
 
+class Colegio(models.Model):
+    col_id = models.AutoField(primary_key=True)
+    rbd = models.IntegerField()
+    nombre = models.CharField(max_length=50)
+    sigla = models.CharField(max_length=5, blank=True, null=True)
+    created_at = models.DateTimeField()
+    updated_at = models.DateTimeField()
 class Alumno(models.Model):
     alum_id = models.AutoField(primary_key=True)
     rut = models.CharField(unique=True, max_length=10)
@@ -19,7 +26,7 @@ class Alumno(models.Model):
     email = models.CharField(unique=True, max_length=200)
     genero = models.CharField(max_length=10, db_collation='utf8mb3_general_ci')
     status = models.CharField(max_length=8, db_collation='utf8mb3_general_ci')
-    col_id = models.IntegerField()
+
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
 
@@ -58,13 +65,6 @@ class Clase(models.Model):
 
 
 
-class Colegio(models.Model):
-    col_id = models.AutoField(primary_key=True)
-    rbd = models.IntegerField()
-    nombre = models.CharField(max_length=50)
-    sigla = models.CharField(max_length=5, blank=True, null=True)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
 
 
 
