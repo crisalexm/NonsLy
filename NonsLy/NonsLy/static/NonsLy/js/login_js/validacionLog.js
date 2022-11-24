@@ -6,6 +6,7 @@ window.addEventListener("load", ()=>{
     form.addEventListener('submit', (e) => {
         e.preventDefault()
         validaCampos()
+    
     })
     const validaCampos = () =>{
         const emailValor = email.value.trim();

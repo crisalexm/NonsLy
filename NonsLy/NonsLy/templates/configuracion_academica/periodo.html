@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Periodo Escolar</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	{%load static%}
+	<link rel="stylesheet" href="{%static 'NonsLy/css/main.css'%}">
+	<link rel="stylesheet" href="{%static 'NonsLy/css/jquery.mCustomScrollbar.css'%}" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+	<!-- SideBar -->
+	<section class="full-box cover dashboard-sideBar">
+		<div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
+		<div class="full-box dashboard-sideBar-ct">
+			<!--SideBar Title -->
+			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
+				Bienvenido a: <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
+			</div>
+			<!-- SideBar User info -->
+			<div class="full-box dashboard-sideBar-UserInfo">
+				<figure class="full-box">
+					<img src="{%static 'NonsLy/img/avatar.jpg'%}" alt="UserIcon">
+					<figcaption class="text-center text-titles">Non-stop-learning</figcaption>
+				</figure>
+				<ul class="full-box list-unstyled text-center">
+					<li>
+						<a href="#!">
+							<i class="zmdi zmdi-settings"></i>
+						</a>
+					</li>
+					<li>
+						<a href="#!" class="btn-exit-system">
+							<i class="zmdi zmdi-power"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+			 
+			<!-- SideBar Menu -->
+			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
+				
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-case zmdi-hc-fw"></i> Configuración Académica <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+
+						<li>
+
+							<a href="{%url 'configuracion_periodo'%}"><i class="zmdi zmdi-timer zmdi-hc-fw"></i> Periodo Escolar </a>
+						</li>
+
+						<li>
+							<a href="{%url 'configuracion_nivel'%}"><i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Nivel Académico </a>
+
+						</li>
+
+						<li>
+							<a href="{%url 'configuracion_curso'%}"><i class="zmdi zmdi-font zmdi-hc-fw"></i> Cursos </a>
+	
+						</li>
+
+						<li>
+							<a href="{%url 'configuracion_asignatura'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Asignaturas </a>
+						</li>
+						
+
+
+					</ul>
+				</li>
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Usuarios <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="{%url 'administracion'%}"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Administración </a>
+						</li>
+						<li>
+							<a href="{%url 'administracion_profesor'%}"><i class="zmdi zmdi-male-alt zmdi-hc-fw"></i> Profesores </a>
+						</li>
+						<li>
+							<a href="{%url 'administracion_alumno'%}"><i class="zmdi zmdi-face zmdi-hc-fw"></i> Alumnos </a>
+						</li>
+						<li>
+							<a href="{%url 'administracion_apoderado'%}"><i class="zmdi zmdi-male-female zmdi-hc-fw"></i> Apoderados </a>
+						</li>
+					</ul>
+				</li>
+				
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i>CONFIGURACIÓN COLEGIO<i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="{%url 'configuracion_colegio'%}"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Datos de Colegio</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<!-- Content page-->
+	<section class="full-box dashboard-contentPage">
+		<!-- NavBar -->
+		<nav class="full-box dashboard-Navbar">
+			<ul class="full-box list-unstyled text-right">
+				<li class="pull-left">
+					<a href="#!" class="btn-menu-dashboard"><i class="zmdi zmdi-more-vert"></i></a>
+				</li>
+					
+			</ul>
+		</nav>
+		<!-- Content page -->
+		<div class="container-fluid">
+			<div class="page-header">
+			  <h1 class="text-titles"><i class="zmdi zmdi-timer zmdi-hc-fw"></i> Administrador  <small> / Periodos</small></h1>
+			</div>
+			<p class="lead">Lo esencial es invisible a los ojos; solo con el corazón se puede ver bien.</p>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12">
+					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+					  	<li class="active"><a href="#new" data-toggle="tab">Nuevo Periodo</a></li>
+					  	<li><a href="#list" data-toggle="tab">Lista de Periodos</a></li>
+					</ul>
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade active in" id="new">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-xs-12 col-md-10 col-md-offset-1">
+									    <form action="">
+									    	<div class="form-group label-floating">
+											  <label class="control-label">Nombre periodo</label>
+											  <input class="form-control" type="text">
+											</div>
+											
+											<div class="form-group">
+											  <label class="control-label">Fecha de Inicio</label>
+											  <input class="form-control" type="date">
+											</div>
+											<div class="form-group">
+											  <label class="control-label">Fecha de Término</label>
+											  <input class="form-control" type="date">
+											</div>
+											
+										    <p class="text-center">
+										    	<button href="#!" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Guardar</button>
+										    </p>
+									    </form>
+									</div>
+								</div>
+							</div>
+						</div>
+					  	<div class="tab-pane fade" id="list">
+							<div class="table-responsive">
+								<table class="table table-hover text-center">
+									<thead>
+										<tr>
+											<th class="text-center">#</th>
+											<th class="text-center">Nombre Periodo</th>
+											<th class="text-center">Fecha de Inicio</th>
+											<th class="text-center">Fecha de Término</th>
+											<th class="text-center">Modificar</th>
+											<th class="text-center">Eliminar</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>First</td>
+											<td>07/01/2017</td>
+											<td>06/04/2017</td>
+											<td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+											<td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>Second</td>
+											<!-- <td>Active</td> -->
+											<td>07/04/2017</td>
+											<td>06/08/2017</td>
+											<!-- <td>2017</td> -->
+											<td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+											<td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>Third</td>
+											<!-- <td>Active</td> -->
+											<td>07/08/2017</td>
+											<td>06/12/2017</td>
+											<!-- <td>2017</td> -->
+											<td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+											<td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
+										</tr>
+									</tbody>
+								</table>
+								<ul class="pagination pagination-sm">
+								  	<li class="disabled"><a href="#!">«</a></li>
+								  	<li class="active"><a href="#!">1</a></li>
+								  	<li><a href="#!">2</a></li>
+								  	<li><a href="#!">3</a></li>
+								  	<li><a href="#!">4</a></li>
+								  	<li><a href="#!">5</a></li>
+								  	<li><a href="#!">»</a></li>
+								</ul>
+							</div>
+					  	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--====== Scripts -->
+</body>
+<script src="{%static 'NonsLy/JQuery/jquery-3.1.1.min.js'%}"></script>
+<script src="{%static 'NonsLy/JQuery/sweetalert2.min.js'%}"></script>
+<script src="{%static 'NonsLy/JQuery/bootstrap.min.js'%}"></script>
+<script src="{%static 'NonsLy/JQuery/material.min.js'%}"></script>
+<script src="{%static 'NonsLy/JQuery/ripples.min.js'%}"></script>
+<script src="{%static 'NonsLy/JQuery/jquery.mCustomScrollbar.concat.min.js'%}"></script>
+<script src="{%static 'NonsLy/JQuery/main.js'%}"></script>
+<script>
+	$.material.init();
+</script>
+</html>

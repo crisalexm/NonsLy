@@ -6,6 +6,8 @@ from django.template import Template, Context
 from django.template.loader import get_template
 from django.shortcuts import render
 from datetime import datetime
+""" from models """
+#-----------------WEBSITE /------------------------------------
 
 def index(request):
     
@@ -31,15 +33,58 @@ def demo(request):
     
     return render(request,'demo/demo.html')
 
-def administrador(request):
-    
-    #if request.GET["email"]:
-        
-     #  mensaje="Admin: %r" %request.GET["email"]
-    
-    #else:
-     #   mensaje="No has ingresado nada"
-    
-    return render(request,'admin/administrador.html')
+#-----------------WEBSITE /------------------------------------
 
+
+#-----------------CONFIGURACIÓN ACADEMICA ------------------------------------
+
+
+def configuracion_periodo(request):
+    
+    return render(request,'configuracion_academica/periodo.html')
+
+def configuracion_nivel(request):
+    
+    return render(request,'configuracion_academica/nivel.html')
+
+def configuracion_curso(request):
+    
+    return render(request,'configuracion_academica/curso.html')
+    
+def configuracion_asignatura(request):
+
+    return render(request,'configuracion_academica/asignatura.html')
+
+#-----------------CONFIGURACIÓN ACADEMICA /------------------------------------
+
+
+#-----------------CONFIGURACIÓN DE USUARIOS------------------------------------
+def administracion(request):
+    profesor= Administracion.object.sall()
+    data={}
+    return render(request,'configuracion_usuarios/administracion.html')
+
+def administracion_profesor(request):
+    
+    return render(request,'configuracion_usuarios/profesor.html')
+
+def administracion_alumno(request):
+    
+    return render(request,'configuracion_usuarios/alumno.html')
+
+def administracion_apoderado(request):
+    
+    return render(request,'configuracion_usuarios/apoderado.html')
+
+
+#-----------------CONFIGURACIÓN DE USUARIOS /------------------------------------
+
+
+#-----------------CONFIGURACIÓN DE COLEGIO------------------------------------
+
+def configuracion_colegio(request):
+    
+    return render(request, 'configuracion_colegio/colegio.html')
+
+#-----------------CONFIGURACIÓN DE COLEGIO------------------------------------
 
