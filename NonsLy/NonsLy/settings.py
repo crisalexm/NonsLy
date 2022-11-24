@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'NonsLy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nonsly',
+        'NAME': 'nonsly_v2',
         'USER':'cristhian',
         'PASSWORD':'1106',
         'HOST':'127.0.0.1',

@@ -60,8 +60,8 @@ def configuracion_asignatura(request):
 
 #-----------------CONFIGURACIÓN DE USUARIOS------------------------------------
 def administracion(request):
-    profesor= Administracion.object.sall()
-    data={}
+    #profesor= Administracion.object.sall()
+    #data={}
     return render(request,'configuracion_usuarios/administracion.html')
 
 def administracion_profesor(request):
