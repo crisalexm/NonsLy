@@ -1,5 +1,5 @@
 from django.db import models
-
+import datetime
 # Create your models here.
 
 class Colegio(models.Model):
@@ -9,8 +9,8 @@ class Colegio(models.Model):
     sigla = models.CharField(max_length=5, blank=True, null=True)
     direccion=models.CharField(max_length=50)
     
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
         ordering=["created_at"]
@@ -21,21 +21,29 @@ class Colegio(models.Model):
         return "%s %s " %(self.nombre, self.sigla)
     
 class Profesor(models.Model):
+    MASCULINO = 'Masculino'
+    FEMENINO = 'Femenino'
+    OTRO = 'Otro'
+    GENEROS = [
+        (MASCULINO, 'Masculino'),
+        (FEMENINO, 'Femenino'),
+        (OTRO, 'Otro'),
+    ]
     prof_id = models.AutoField(primary_key=True)
     rut = models.CharField(unique=True, max_length=10)
     nombre = models.CharField(max_length=50)
     apellido1 = models.CharField(max_length=50)
     apellido2 = models.CharField(max_length=50, blank=True, null=True)
-    fechanacimiento = models.DateField(db_column='fechaNacimiento')  # Field name made lowercase.
+    fecha_nacimiento = models.DateField(db_column='fechaNacimiento')  # Field name made lowercase.
     telefono = models.CharField(max_length=11)
-    email = models.CharField(unique=True, max_length=200)
-    genero = models.CharField(max_length=10)
+    email = models.EmailField(unique=True, max_length=200)
+    genero = models.CharField(max_length=10,  choices=GENEROS)
     especialidad = models.CharField(max_length=50, blank=True, null=True)
     
     colegio=models.ManyToManyField(Colegio, max_length=50)
     
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering=["created_at"]
@@ -46,6 +54,23 @@ class Profesor(models.Model):
         return "%s %s - %s" %(self.nombre, self.apellido1, self.email)
     
 class Alumno(models.Model):
+    ACTIVO = 'Activo'
+    INACTIVO = 'Inactivo'
+    ESTADOS =[
+        (ACTIVO,'Activo'),
+        (INACTIVO,'Inactivo'),
+        ]
+    
+    MASCULINO = 'Masculino'
+    FEMENINO = 'Femenino'
+    OTRO = 'Otro'
+    GENEROS = [
+        (MASCULINO, 'Masculino'),
+        (FEMENINO, 'Femenino'),
+        (OTRO, 'Otro'),
+    ]
+    
+    
     alum_id = models.AutoField(primary_key=True)
     rut = models.CharField(unique=True, max_length=10)
     nombre = models.CharField(max_length=50, db_collation='utf8mb3_general_ci')
@@ -54,14 +79,15 @@ class Alumno(models.Model):
     fecha_nacimiento = models.DateField(db_column='fechaNacimiento')  # Field name made lowercase.
     telefono = models.CharField(max_length=11, db_collation='utf8mb3_general_ci')
     email = models.CharField(unique=True, max_length=200)
-    genero = models.CharField(max_length=10, db_collation='utf8mb3_general_ci')
-    status = models.CharField(max_length=8, db_collation='utf8mb3_general_ci')
+    genero = models.CharField(max_length=10, db_collation='utf8mb3_general_ci', choices=GENEROS)
     
-    curso=models.ManyToManyField('Curso')
+    status = models.CharField(max_length=8, db_collation='utf8mb3_general_ci', choices=ESTADOS)
+    
+    curso=models.ForeignKey('Curso',  on_delete=models.SET_NULL, null=True)
     colegio=models.ForeignKey(Colegio,  on_delete=models.SET_NULL, null=True)
     
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return "%s %s - %s" %(self.nombre, self.apellido1, self.email)
@@ -73,6 +99,15 @@ class Alumno(models.Model):
 
 
 class Apoderado(models.Model):
+    MASCULINO = 'Masculino'
+    FEMENINO = 'Femenino'
+    OTRO = 'Otro'
+    GENEROS = [
+        (MASCULINO, 'Masculino'),
+        (FEMENINO, 'Femenino'),
+        (OTRO, 'Otro'),
+    ]
+    
     apo_id = models.AutoField(primary_key=True)
     rut = models.CharField(unique=True, max_length=10)
     nombre = models.CharField(max_length=50)
@@ -81,12 +116,12 @@ class Apoderado(models.Model):
     fecha_nacimiento = models.DateField(db_column='fechaNacimiento')  # Field name made lowercase.
     telefono = models.CharField(max_length=11)
     email = models.CharField(unique=True, max_length=200)
-    genero = models.CharField(max_length=10, db_collation='utf8mb3_general_ci')
+    genero = models.CharField(max_length=10, db_collation='utf8mb3_general_ci', choices=GENEROS)
     
     alumno=models.ManyToManyField(Alumno)
     
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     
 
@@ -99,27 +134,34 @@ class Apoderado(models.Model):
         verbose_name_plural='Apoderados'
         
 class Curso(models.Model):
+    YEAR_CHOICES = []
+    
+    for r in range(2000, (datetime.datetime.now().year+1)):
+        YEAR_CHOICES.append((r,r))
+        
     curso_id = models.AutoField(primary_key=True)
     nombre = models.CharField(unique=True, max_length=50)
     capacidad = models.PositiveIntegerField()
     nivel = models.ForeignKey('Nivel', on_delete=models.SET_NULL, null=True)
-    annio_academico=models.DateField()
+    annio_academico=models.IntegerField(choices=YEAR_CHOICES, default=datetime.datetime.now().year,verbose_name="Año académico")
     
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return "%s - %s" %(self.nombre, self.curso_id)
     class Meta:
         ordering=["nivel"]
         db_table = 'curso'
-        verbose_name_plural=["Cursos"]
+        verbose_name_plural="Cursos"
         
 
 class Nivel(models.Model):
     niv_id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=25)
     
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.nombre}'
@@ -133,12 +175,12 @@ class Nivel(models.Model):
 class Asignatura(models.Model):
     asig_id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50)
-    codigo=models.IntegerField()
+    codigo=models.CharField(max_length=5,unique=True)
     
     curso=models.ForeignKey(Curso, models.DO_NOTHING)
     
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering=["nombre"]
@@ -151,8 +193,8 @@ class Periodo(models.Model):
     fecha_inicio = models.DateField()  # Field name made lowercase.
     fecha_fin = models.DateField()  # Field name made lowercase.
     
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural='Periodos'
@@ -166,8 +208,8 @@ class Evaluacion(models.Model):
     
     asignatura = models.ForeignKey(Asignatura, models.DO_NOTHING)
     
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural='Evaluaciones'
@@ -181,8 +223,8 @@ class Clase(models.Model):
     
     per = models.ForeignKey(Periodo, models.DO_NOTHING)
     
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         
@@ -198,8 +240,8 @@ class Nota(models.Model):
     prof = models.ForeignKey(Profesor, models.DO_NOTHING)
     eva = models.ForeignKey(Evaluacion, models.DO_NOTHING)
     
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural='Notas'

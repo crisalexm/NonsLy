@@ -33,6 +33,14 @@
     font-weight: normal;
     font-style: normal;
 }
+.form-group.ok input{
+    border: 0.1px solid;
+    border-color: #08ffc8;
+}
+.form-group.falla input{
+    border: 0.1px solid;
+    border-color: red;
+}
 /*============ Estilos generales*/
 body, html{
 	background-color: rgb(255, 255, 255);
