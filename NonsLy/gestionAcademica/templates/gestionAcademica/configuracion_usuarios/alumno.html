@@ -254,7 +254,7 @@
 										{%for alumno in alumnos%}
 										<tr>
 											
-											<th class="text-center">1</th>
+											<th class="text-center">{{forloop.counter}}</th>
 											<th class="text-center">{{alumno.nombre}}</th>
 											<th class="text-center">{{alumno.apellido1}}</th>
 											<th class="text-center">{{alumno.apellido2}}</th>
@@ -266,7 +266,7 @@
 											<th class="text-center">{{alumno.status}}</th>
 											<th class="text-center">{{alumno.curso}}</th>
 											
-											<td><a href="edicion_alumno/{{alumno.alum_id}}" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+											<td><a href="/gestionAcademica/edicion_alumno/{{alumno.alum_id}}" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
 											<td><a href="/gestionAcademica/eliminar_alumno/{{alumno.alum_id}}" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
 										</tr>
 										{%endfor%}

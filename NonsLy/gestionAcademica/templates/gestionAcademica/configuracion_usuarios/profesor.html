@@ -228,7 +228,7 @@
 									<tbody>
 										{% for p in  profesores%}
 										<tr>
-											<td>1</td>
+											<th class="text-center">{{forloop.counter}}</th>
 											<td>{{p.nombre}}</td>
 											<td>{{p.apellido1}}</td>
 											<td>{{p.apellido2}}</td>
@@ -237,7 +237,7 @@
 											<td>{{p.telefono}}</td>
 											<td>{{p.genero}}</td>
 											<td>{{p.especialidad}}</td>
-											<td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+											<td><a href="/gestionAcademica/edicion_profesor/{{p.prof_id}}" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
 											<td><a href="/gestionAcademica/eliminar_profesor/{{p.prof_id}}" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
 										</tr>
 										{% endfor %}

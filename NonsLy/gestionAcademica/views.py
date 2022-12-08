@@ -36,6 +36,18 @@ def registra_nivel(request):
         )
         return redirect('configuracion_nivel')  
 
+def edicion_nivel(request, niv_id):
+    nivel = Nivel.objects.filter(niv_id=niv_id).first()
+    return render (request, 'gestionAcademica/configuracion_academica/edicion_nivel.html', {"nivel": nivel})
+    
+def editar_nivel(request):
+    nombre = request.POST.get('nombre')
+    id = int(request.POST.get('id'))
+    nivel = Nivel.objects.get(niv_id=id) 
+    nivel.nombre = nombre
+    nivel.save()
+    return redirect ("configuracion_nivel")
+
 
 def eliminar_nivel(self, niv_id):
     nivel= Nivel.objects.filter(niv_id=niv_id).delete()
@@ -70,7 +82,27 @@ def registra_curso(request):
         )
         
         return redirect('configuracion_curso')  
-    
+ 
+def edicion_curso(request, curso_id):
+    curso = Curso.objects.filter(curso_id=curso_id).first()
+    niveles = Nivel.objects.all()
+    return render (request, 'gestionAcademica/configuracion_academica/edicion_curso.html', {"curso": curso, "niveles":niveles}) 
+
+def editar_curso(request):
+    nombre = request.POST.get('nombre')
+    capacidad = request.POST.get('capacidad')
+    annio_academico = request.POST.get('annio_academico')
+    id = int(request.POST.get('id'))
+    id_nivel= request.POST.get('nivel')
+    nivel=Nivel.objects.get(niv_id=id_nivel)
+    curso = Curso.objects.get(curso_id=id) 
+    curso.nombre = nombre
+    curso.capacidad = capacidad
+    curso.annio_academico = annio_academico
+    curso.nivel= nivel
+    curso.save()
+    return redirect ("configuracion_curso")
+     
 def eliminar_curso(self, curso_id):
     curso= Curso.objects.filter(curso_id=curso_id).delete()
     if len(curso)>0:
@@ -104,7 +136,25 @@ def registra_asignatura(request):
         )
         
         return redirect('configuracion_asignatura')  
-    
+
+def edicion_asignatura(request,asig_id): 
+    asignatura = Asignatura.objects.filter(asig_id=asig_id).first()
+    cursos = Curso.objects.all()
+    return render (request, 'gestionAcademica/configuracion_academica/edicion_asignatura.html', {"asignatura": asignatura, "cursos":cursos}) 
+
+def editar_asignatura(request):
+    nombre = request.POST.get('nombre')
+    codigo = request.POST.get('codigo')
+    id = int(request.POST.get('id'))
+    id_curso= request.POST.get('curso')
+    curso = Curso.objects.get(curso_id=id_curso)
+    asignatura = Asignatura.objects.get(asig_id=id) 
+    asignatura.nombre = nombre
+    asignatura.codigo = codigo
+    asignatura.curso= curso
+    asignatura.save()
+    return redirect ("configuracion_asignatura")
+
 def eliminar_asignatura(self, asig_id):
     asignatura= Asignatura.objects.filter(asig_id=asig_id).delete()
     if len(asignatura)>0:
@@ -154,7 +204,49 @@ def registra_profesor(request):
         for x in colegio_ids:
             profesor.colegio.add(Colegio.objects.get(col_id=x))
         return redirect('administracion_profesor')
+
+def edicion_profesor(request, prof_id):
+    profesor = Profesor.objects.filter(prof_id=prof_id).first()
     
+    return render(request,'gestionAcademica/configuracion_usuarios/edicion_profesor.html',
+                  {
+                      "profesor" : profesor,
+                      "colegios":Colegio.objects.all()
+                  })
+
+def editar_profesor(request):
+        id = int(request.POST.get('id'))
+        nombre = request.POST.get('nombre')
+        apellido1 = request.POST.get('apellido1')
+        apellido2 = request.POST.get('apellido2')
+        rut = request.POST.get('rut')
+        fecha_nacimiento = request.POST.get('fecha_nacimiento')
+        email = request.POST.get('email')
+        telefono = request.POST.get('telefono')
+        genero= request.POST.get('genero')
+        especialidad =request.POST.get('especialidad')
+        profesor = Profesor.objects.get(prof_id=id) 
+        colegio_nombres = [x.nombre for x in Colegio.objects.all()]
+        colegio_ids = []
+        
+        for x in colegio_nombres:
+            colegio_ids.append(str(request.POST.get(x)))
+        
+        for x in colegio_ids:
+            profesor.colegio.add(Colegio.objects.get(col_id=x))
+            
+        profesor.nombre = nombre
+        profesor.apellido1 = apellido1
+        profesor.apellido2= apellido2
+        profesor.rut = rut
+        profesor.fecha_nacimiento = fecha_nacimiento
+        profesor.email = email
+        profesor.telefono = telefono
+        profesor.genero =genero
+        profesor.especialidad = especialidad
+        profesor.save()
+        
+        return redirect('administracion_profesor')   
 def eliminar_profesor(self, prof_id):
     profesor= Profesor.objects.filter(prof_id=prof_id).delete()
     if len(profesor)>0:
@@ -204,6 +296,50 @@ def registra_alumno(request):
                                        colegio = colegio
                                        )
         return redirect('administracion_alumno')
+    
+def edicion_alumno(request, alum_id):
+    alumno = Alumno.objects.filter(alum_id=alum_id).first()    
+    cursos = Curso.objects.all()    
+    colegios = Colegio.objects.all()    
+    
+    return render (request, 'gestionAcademica/configuracion_usuarios/edicion_alumno.html',
+                   {
+                       "alumno":alumno,
+                       "cursos":cursos,
+                       "colegios":colegios
+                   })
+
+def editar_alumno(request):
+    id=request.POST.get('id')
+    nombre = request.POST.get('nombre')
+    apellido1 = request.POST.get('apellido1')
+    apellido2 = request.POST.get('apellido2')
+    rut = request.POST.get('rut')
+    fecha_nacimiento = request.POST.get('fecha_nacimiento')
+    email = request.POST.get('email')
+    telefono = request.POST.get('telefono')
+    genero= request.POST.get('genero')
+    status= request.POST.get('status')
+    id_curso = request.POST.get('curso')
+    id_colegio = request.POST.get('colegio')
+    
+    alumno = Alumno.objects.get(pk=id)
+    curso = Curso.objects.get(pk=id_curso)
+    colegio = Colegio.objects.get(pk=id_colegio)
+    
+    alumno.nombre = nombre
+    alumno.apellido1 = apellido1
+    alumno.apellido2 = apellido2
+    alumno.rut = rut
+    alumno.fecha_nacimiento=fecha_nacimiento
+    alumno.email = email
+    alumno.telefono = telefono
+    alumno.genero = genero
+    alumno.status =status
+    alumno.curso = curso
+    alumno.colegio = colegio
+    alumno.save()
+    return redirect('administracion_alumno')
     
 def eliminar_alumno(self, alum_id):
     alumno= Alumno.objects.filter(alum_id=alum_id).delete()

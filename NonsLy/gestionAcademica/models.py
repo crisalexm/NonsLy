@@ -34,7 +34,7 @@ class Profesor(models.Model):
     nombre = models.CharField(max_length=50)
     apellido1 = models.CharField(max_length=50)
     apellido2 = models.CharField(max_length=50, blank=True, null=True)
-    fecha_nacimiento = models.DateField(db_column='fechaNacimiento')  # Field name made lowercase.
+    fecha_nacimiento = models.DateField(db_column='fechaNacimiento' ) # Field name made lowercase.
     telefono = models.CharField(max_length=11)
     email = models.EmailField(unique=True, max_length=200)
     genero = models.CharField(max_length=10,  choices=GENEROS)
@@ -184,7 +184,7 @@ class Asignatura(models.Model):
 
     class Meta:
         ordering=["nombre"]
-        verbose_name_plural='Asignaturas'
+        verbose_name_plural=  'Asignaturas'
         db_table = 'asignatura'     
 
 class Periodo(models.Model):

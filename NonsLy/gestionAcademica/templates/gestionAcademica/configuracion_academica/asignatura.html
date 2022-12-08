@@ -181,11 +181,11 @@
 									<tbody>
 										{% for a in asignaturas %}
 										<tr>
-											<td>1</td>
+											<th class="text-center">{{forloop.counter}}</th>
 											<td>{{a.codigo}}</td>
 											<td>{{a.nombre}}</td>
-											<td>{{a.curso}}</td>
-											<td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+											<td>{{a.curso.nombre}}</td>
+											<td><a href="/gestionAcademica/edicion_asignatura/{{a.asig_id}}" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
 											<td><a href="/gestionAcademica/eliminar_asignatura/{{a.asig_id}}" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
 										</tr>
 										{% endfor %}

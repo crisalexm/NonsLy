@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title> Nivel </title>
+	<title> Alumnos </title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    {%load static%}
+	{%load static%}
 	<link rel="stylesheet" href="{%static 'NonsLy/css/main.css'%}">
 	<link rel="stylesheet" href="{%static 'NonsLy/css/jquery.mCustomScrollbar.css'%}" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -23,7 +23,7 @@
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				Bienvenido a: <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
+				Bienvenido a:<i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
 			<div class="full-box dashboard-sideBar-UserInfo">
@@ -69,7 +69,7 @@
 						</li>
 
 						<li>
-							<a href="{%url 'configuracion_asignatura'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Asignaturas</a>
+							<a href="{%url 'configuracion_asignatura'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Asignaturas </a>
 						</li>
 						
 
@@ -78,7 +78,7 @@
 				</li>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Usuarios<i class="zmdi zmdi-caret-down pull-right"></i>
+						<i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Usuarios <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
@@ -101,7 +101,7 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="{%url 'configuracion_colegio'%}"><i class="zmdi zmdi-balance zmdi-hc-fw"></i>  Datos de Colegio </a>
+							<a href="{%url 'configuracion_colegio'%}"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Datos de Colegio </a>
 						</li>
 					</ul>
 				</li>
@@ -122,7 +122,7 @@
 		<!-- Content page -->
 		<div class="container-fluid">
 			<div class="page-header">
-			  <h1 class="text-titles"><i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Administrador <small> / Nivel </small></h1>
+			  <h1 class="text-titles"><i class="zmdi zmdi-face zmdi-hc-fw"></i> USUARIO <small> Administrador / Alumnos </small></h1>
 			</div>
 			<p class="lead">Lo esencial es invisible a los ojos; solo con el corazón se puede ver bien</p>
 		</div>
@@ -130,20 +130,99 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-					  	<li class="active"><a href="#new" data-toggle="tab"> Nuevo nivel</a></li>
-					  	<li><a href="#list" data-toggle="tab"> Niveles </a></li>
+					  	<li class="active"><a href="#new" data-toggle="tab"> Nuevo alumno </a></li>
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
-									    <form action="{%url 'registra_nivel'%}" method= "POST">
-											{%csrf_token%}
+									    <form action="{%url 'editar_alumno'%}" method="POST">
+										{%csrf_token%}
+										<fieldset> Datos alumnos </fieldset>
 									    	<div class="form-group label-floating">
-											  <label class="control-label"> Nombre Nivel </label>
-											  <input class="form-control" type="text" name ="nombre">
+											  <label class="control-label"> Nombres </label>
+											  <input class="form-control" type="text" id="nombre" name="nombre" value="{{alumno.nombre}}">
+											  <input type="hidden" name="id" value="{{alumno.alum_id}}">
+											  <p></p>
 											</div>
+
+											<div class="form-group label-floating">
+											  <label class="control-label"> Apellido Paterno </label>
+											  <input class="form-control" type="text" name="apellido1" id="apellido1" value="{{alumno.apellido1}}">
+											  <p></p>
+											</div>
+
+											<div class="form-group label-floating">
+												<label class="control-label"> Apellido Materno </label>
+												<input class="form-control" type="text" name="apellido2" id="apellido2" value="{{alumno.apellido2}}">
+											</div>
+
+											<div class="form-group label-floating">
+												<label class="control-label"> Rut </label>
+												<input class="form-control" type="text" name="rut" id="rut" value="{{alumno.rut}}">
+												<p></p>
+											</div>
+
+											<div class="form-group ">
+												<label class="control-label"> Fecha de Nacimiento</label>
+												<input class="form-control" type="date" name="fecha_nacimiento" id="fecha_nacimiento" required value="{{alumno.fecha_nacimiento}}">
+											</div>
+
+											<div class="form-group label-floating">
+												<label class="control-label"> Email</label>
+												<input class="form-control" type="email" name="email" id="email" value="{{alumno.email}}">
+												<p></p>
+											</div>
+											  
+											<div class="form-group label-floating">
+												<label class="control-label"> Teléfono </label>
+												<input class="form-control" type="number" name="telefono" id="telefono" value="{{alumno.telefono}}">
+												<p></p>
+											</div>
+
+											<div class="form-group  label-floating">
+										        <label class="control-label"> Genero </label>
+										        <select class="form-control" name="genero" value="{{alumno.genero}}">
+										          <option>Masculino</option>
+										          <option>Femenino</option>
+										          <option>Otro</option>
+										        </select> 
+											</div>
+											
+											<div class="form-group">
+										        <label class="control-label"> Estado </label>
+										        <select class="form-control" name="status" value="{{alumno.status}}" >
+										          <option>Activo</option>
+										          <option>Inactivo</option>
+										        </select> 	
+											</div>
+											
+											
+											<div class="form-group">
+										      <label class="control-label"> Foto </label>
+										      <div>
+										        <input type="text" readonly="" class="form-control" placeholder="Browse...">
+										        <input type="file" >
+										      </div>
+										    </div>
+									    	<div class="form-group label-floating">
+												<label class="control-label">Curso</label>
+												<select class="form-control" name="curso" required>
+												  {% for  curso in  cursos%}
+												  <option value="{{curso.curso_id}}">{{curso.nombre}}</option>
+												  {% endfor %}
+												</select>
+											</div>
+									    	<div class="form-group label-floating">
+												<label class="control-label">Colegio</label>
+												<select class="form-control" name="colegio" required>
+												  {% for  colegio in  colegios%}
+												  <option value="{{colegio.col_id}}">{{colegio.nombre}}</option>
+												  {% endfor %}
+												</select>
+											</div>
+										    <br><br>
 										    <p class="text-center">
 										    	<button href="#!" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Guardar </button>
 										    </p>
@@ -152,46 +231,31 @@
 								</div>
 							</div>
 						</div>
-					  	<div class="tab-pane fade" id="list">
-							<div class="table-responsive">
-								<table class="table table-hover text-center">
-									<thead>
-										<tr>
-											<th class="text-center">#</th>
-											<th class="text-center">Nombre Nivel</th>
-											<th class="text-center">Editar</th>
-											<th class="text-center">Eliminar</th>
-										</tr>
-									</thead>
-									<tbody>
-										{%for n in niveles%}
-										<tr>
-											<td>{{forloop.counter}}</td>
-											<td>{{n.nombre}}</td>
-											<td><a href="/gestionAcademica/edicion_nivel/{{n.niv_id}}" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-											<td><a href="/gestionAcademica/eliminar_nivel/{{n.niv_id}}" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-										</tr>
-										{%endfor%}
-									</tbody>
-								</table>
-								<ul class="pagination pagination-sm">
-								  	<li class="disabled"><a href="#!">«</a></li>
-								  	<li class="active"><a href="#!">1</a></li>
-								  	<li><a href="#!">2</a></li>
-								  	<li><a href="#!">3</a></li>
-								  	<li><a href="#!">4</a></li>
-								  	<li><a href="#!">5</a></li>
-								  	<li><a href="#!">»</a></li>
-								</ul>
-							</div>
-					  	</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<!-- Dialog help -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="Dialog-Help">
+	  	<div class="modal-dialog" role="document">
+		    <div class="modal-content">
+			    <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			    	<h4 class="modal-title">Help</h4>
+			    </div>
+			    <div class="modal-body">
+			        <p>
+			        	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt beatae esse velit ipsa sunt incidunt aut voluptas, nihil reiciendis maiores eaque hic vitae saepe voluptatibus. Ratione veritatis a unde autem!
+			        </p>
+			    </div>
+		      	<div class="modal-footer">
+		        	<button type="button" class="btn btn-primary btn-raised" data-dismiss="modal"><i class="zmdi zmdi-thumb-up"></i> Ok</button>
+		      	</div> 
+		    </div>
+	  	</div>
+	</div>
 </body>
-	<!--====== Scripts -->
 <script src="{%static 'NonsLy/JQuery/jquery-3.1.1.min.js'%}"></script>
 <script src="{%static 'NonsLy/JQuery/sweetalert2.min.js'%}"></script>
 <script src="{%static 'NonsLy/JQuery/bootstrap.min.js'%}"></script>
@@ -199,6 +263,7 @@
 <script src="{%static 'NonsLy/JQuery/ripples.min.js'%}"></script>
 <script src="{%static 'NonsLy/JQuery/jquery.mCustomScrollbar.concat.min.js'%}"></script>
 <script src="{%static 'NonsLy/JQuery/main.js'%}"></script>
+<script src="{%static 'NonsLy/js/validacionRegistraAlumno/validacionRegistraAlumno.js'%}" type="module"></script>
 <script>
 	$.material.init();
 </script>

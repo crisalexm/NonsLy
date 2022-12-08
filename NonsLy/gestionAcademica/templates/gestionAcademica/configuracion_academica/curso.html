@@ -176,6 +176,7 @@
 								<table class="table table-hover text-center">
 									<thead>
 										<tr>
+											
 											<th class="text-center">#</th>
 											<th class="text-center">Nombre</th>
 											<th class="text-center">Capacidad</th>
@@ -188,12 +189,12 @@
 									<tbody>
 										{%for c in cursos%}
 										<tr>
-											<td>1</td>
+											<th class="text-center">{{forloop.counter}}</th>
 											<td>{{c.nombre}}</td>
 											<td>{{c.capacidad}}</td>
 											<td>{{c.annio_academico}}</td>
 											<td>{{c.nivel}}</td>
-											<td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+											<td><a href="/gestionAcademica/edicion_curso/{{c.curso_id}}" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
 											<td><a href="/gestionAcademica/eliminar_curso/{{c.curso_id}}" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
 										</tr>
 										{%endfor%}
