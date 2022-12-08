@@ -385,6 +385,47 @@ def registra_apoderado(request):
         for x in alumno_ids:
             apoderado.alumno.add(Alumno.objects.get(alum_id=x))
         return redirect('administracion_apoderado')
+
+def edicion_apoderado(request, apo_id):
+    apoderado = Apoderado.objects.filter(apo_id=apo_id).first()
+    alumnos = Alumno.objects.all()
+    
+    return render(request, 'gestionAcademica/configuracion_usuarios/edicion_apoderado.html',
+                  {
+                      "apoderado":apoderado,
+                      "alumnos": alumnos
+                  })
+
+def editar_apoderado(request):
+        id = int(request.POST.get('id'))
+        nombre = request.POST.get('nombre')
+        apellido1 = request.POST.get('apellido1')
+        apellido2 = request.POST.get('apellido2')
+        rut = request.POST.get('rut')
+        fecha_nacimiento = request.POST.get('fecha_nacimiento')
+        email = request.POST.get('email')
+        telefono = request.POST.get('telefono')
+        genero= request.POST.get('genero')
+        alumno_nombres = [x.nombre for x in Alumno.objects.all()]
+        alumno_ids = []
+        apoderado = Apoderado.objects.get(pk=id)
+        
+        for x in alumno_nombres:
+            alumno_ids.append(int(request.POST.get(x)))
+        for x in alumno_ids:
+            apoderado.alumno.add(Alumno.objects.get(alum_id=x))
+        
+
+        apoderado.nombre= nombre
+        apoderado.apellido1= apellido1
+        apoderado.apellido2 = apellido2
+        apoderado.rut = rut
+        apoderado.fecha_nacimiento = fecha_nacimiento
+        apoderado.email = email
+        apoderado.telefono = telefono
+        apoderado.genero = genero
+        apoderado.save()
+        return redirect('administracion_apoderado')
         
 def eliminar_apoderado(self, apo_id):
     

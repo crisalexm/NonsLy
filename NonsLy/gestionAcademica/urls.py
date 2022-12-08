@@ -42,7 +42,8 @@ urlpatterns = [
     path('administracion_apoderado/', views.administracion_apoderado, name='administracion_apoderado'),
     path('registra_apoderado/', views.registra_apoderado, name='registra_apoderado'),
     path('eliminar_apoderado/<apo_id>', views.eliminar_apoderado, name='eliminar_apoderado'),
-    
+    path('edicion_apoderado/<apo_id>', views.edicion_apoderado, name='edicion_apoderado'),
+    path('editar_apoderado/', views.editar_apoderado, name='editar_apoderado'),
 #-----------------CONFIGURACIÓN DE USUARIOS /------------------------------------
     path('configuracion_colegio/', views.configuracion_colegio, name='configuracion_colegio'),
 

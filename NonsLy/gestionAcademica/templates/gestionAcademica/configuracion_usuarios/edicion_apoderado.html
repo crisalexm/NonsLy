@@ -128,51 +128,53 @@
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
-									    <form action="{%url 'registra_apoderado'%}" method="POST">
+									    <form action="{%url 'editar_apoderado'%}" method="POST">
 											{%csrf_token%}
 									    	<div class="form-group label-floating">
 											  <label class="control-label"> Nombre </label>
-											  <input class="form-control" type="text" name="nombre">
+											  <input class="form-control" type="text" name="nombre" value="{{apoderado.nombre}}">
+											  <input type="hidden" name="id" value="{{apoderado.apo_id}}">
 											</div>
 											<div class="form-group label-floating">
 											  <label class="control-label"> Apellido Parterno </label>
-											  <input class="form-control" type="text" name="apellido1">
+											  <input class="form-control" type="text" name="apellido1" value="{{apoderado.apellido1}}">
 											</div>
 
 											<div class="form-group label-floating">
 												<label class="control-label"> Apellido Materno </label>
-												<input class="form-control" type="text" name="apellido2">
+												<input class="form-control" type="text" name="apellido2" value="{{apoderado.apellido2}}">
 											</div>
 
 											<div class="form-group label-floating">
 												<label class="control-label"> Rut </label>
-												<input class="form-control" type="text"  name="rut">
+												<input class="form-control" type="text"  name="rut" value="{{apoderado.rut}}">
 											</div>
 										
 											<div class="form-group">
 												<label class="control-label"> Fecha de Nacimiento</label>
-												<input class="form-control" type="date" name="fecha_nacimiento">
+												<input class="form-control" type="date" name="fecha_nacimiento" value="{{apoderado.fecha_nacimiento}}" required>
 											  </div>
 
 											<div class="form-group label-floating">
 												<label class="control-label"> Teléfono </label>
-												<input class="form-control" type="number" name="telefono">
+												<input class="form-control" type="number" name="telefono" value="{{apoderado.telefono}}">
 											</div>
 											
 											<div class="form-group">
 												<label class="control-label"> Email</label>
-												<input class="form-control" type="email" name="email">
+												<input class="form-control" type="email" name="email" value="{{apoderado.email}}">
 											</div>
 
 											<div class="form-group">
 										        <label class="control-label">Genero</label>
-										        <select class="form-control" name="genero">
+										        <select class="form-control" name="genero" value="{{apoderado.genero}}">
 										          <option>Masculino</option>
 										          <option>Femenino</option>
 										        </select>
 										    </div>
 
 											<div class="form-group">
+												<label>Hijos</label>
 												{% for alumno in  alumnos %}
 												<input type="checkbox" name="{{alumno.nombre}}" value="{{alumno.alum_id}}"> {{alumno.nombre}}
 												{% endfor %}
@@ -186,51 +188,6 @@
 								</div>
 							</div>
 						</div>
-					  	<div class="tab-pane fade" id="list">
-							<div class="table-responsive">
-								<table class="table table-hover text-center">
-									<thead>
-										<tr>
-											<th class="text-center">#</th>
-											<th class="text-center">Nombre</th>
-											<th class="text-center">Apellido Paterno</th>
-											<th class="text-center">Apellido Materno</th>
-											<th class="text-center">Rut</th>
-											<th class="text-center">Email</th>
-											<th class="text-center">Fecha de Nacimiento</th>
-											<th class="text-center">Teléfono</th>
-											<th class="text-center">Update</th>
-											<th class="text-center">Delete</th>
-										</tr>
-									</thead>
-									<tbody>
-										{% for a in apoderados %}
-										<tr>
-											<th class="text-center">{{forloop.counter}}</th>
-											<td>{{a.nombre}}</td>
-											<td>{{a.apellido1}}</td>
-											<td>{{a.apellido2}}</td>
-											<td>{{a.rut}}</td>
-											<td>{{a.email}}</td>
-											<td>{{a.fecha_nacimiento}}</td>
-											<td>{{a.telefono}}</td>
-											<td><a href="/gestionAcademica/edicion_apoderado/{{a.apo_id}}" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-											<td><a href="/gestionAcademica/eliminar_apoderado/{{a.apo_id}}" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-										</tr>
-										{% endfor %}
-									</tbody>
-								</table>
-								<ul class="pagination pagination-sm">
-								  	<li class="disabled"><a href="#!">«</a></li>
-								  	<li class="active"><a href="#!">1</a></li>
-								  	<li><a href="#!">2</a></li>
-								  	<li><a href="#!">3</a></li>
-								  	<li><a href="#!">4</a></li>
-								  	<li><a href="#!">5</a></li>
-								  	<li><a href="#!">»</a></li>
-								</ul>
-							</div>
-					  	</div>
 					</div>
 				</div>
 			</div>
