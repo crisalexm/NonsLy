@@ -45,6 +45,11 @@ urlpatterns = [
     path('edicion_apoderado/<apo_id>', views.edicion_apoderado, name='edicion_apoderado'),
     path('editar_apoderado/', views.editar_apoderado, name='editar_apoderado'),
 #-----------------CONFIGURACIÓN DE USUARIOS /------------------------------------
+
+#---------------------------------CONFIGURACIÓN NOTAS ---------------------------
+    path('ingreso_calificacion/', views.ingreso_calificacion,name ='ingreso_calificacion'),
+    path('registra_nota/', views.registra_nota,name ='registra_nota'),
+
     path('configuracion_colegio/', views.configuracion_colegio, name='configuracion_colegio'),
 
 ]

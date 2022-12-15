@@ -182,6 +182,9 @@ class Asignatura(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f'{self.nombre} - {self.curso.nombre}'
+
     class Meta:
         ordering=["nombre"]
         verbose_name_plural=  'Asignaturas'
@@ -211,6 +214,8 @@ class Evaluacion(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f'{self.nombre}'
     class Meta:
         verbose_name_plural='Evaluaciones'
         ordering=["nombre"]
@@ -234,11 +239,17 @@ class Clase(models.Model):
         
 class Nota(models.Model):
     nota_id = models.AutoField(primary_key=True)
-    nota_obtenida = models.DecimalField(max_digits=3, decimal_places=2)  # Field name made lowercase.
+    nota_obtenida1 = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
+    nota_obtenida2 = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
+    nota_obtenida3 = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
+    nota_obtenida4 = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
+    nota_obtenida5 = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
+    nota_obtenida6 = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
+    nota_obtenida7 = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
     
-    alum = models.ForeignKey(Alumno, models.DO_NOTHING)
-    prof = models.ForeignKey(Profesor, models.DO_NOTHING)
-    eva = models.ForeignKey(Evaluacion, models.DO_NOTHING)
+    alumno = models.ForeignKey(Alumno, models.DO_NOTHING)
+    profesor = models.ForeignKey(Profesor, models.DO_NOTHING)
+    evaluacion = models.ForeignKey(Evaluacion, models.DO_NOTHING)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)

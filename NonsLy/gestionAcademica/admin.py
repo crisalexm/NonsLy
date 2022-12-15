@@ -39,7 +39,7 @@ class PeriodoAdmin(admin.ModelAdmin):
        search_fields = ("per_id",)
 
 class NotaAdmin(admin.ModelAdmin):
-       list_display = ("nota_id", "nota_obtenida", "alum", "prof", "eva")
+       list_display = ("nota_id", "nota_obtenida1", "alumno", "profesor", "evaluacion")
        search_fields = ("per_id",)
 class NivelAdmin(admin.ModelAdmin):
        list_display = ("niv_id", "nombre")

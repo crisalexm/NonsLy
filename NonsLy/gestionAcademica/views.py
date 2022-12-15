@@ -281,8 +281,10 @@ def registra_alumno(request):
         status= request.POST.get('status')
         id_curso = request.POST.get('curso')
         id_colegio = request.POST.get('colegio')
+        
         colegio = Colegio.objects.get(col_id= id_colegio)
         curso = Curso.objects.get(curso_id=id_curso)
+        
         alumno = Alumno.objects.create(nombre=nombre, 
                                        apellido1=apellido1, 
                                        apellido2=apellido2, 
@@ -457,7 +459,47 @@ def configuracion_colegio(request):
             direccion=direccion
         )
     
-    return render(request, 'gestionAcademica/configuracion_colegio/colegio.html' )
+        return render(request, 'gestionAcademica/configuracion_colegio/colegio.html' )
 
+def ingreso_calificacion(request):
+    
+    return render(request, 'gestionAcademica/configuracion_academica/ingresaCalificacion.html',
+                    {
+                        "notas": Nota.objects.all(),
+                        "alumnos": Alumno.objects.all(),
+                        "profesores": Profesor.objects.all(), 
+                        "evaluaciones": Evaluacion.objects.all()
+                    })
+    
+def registra_nota(request):
+    if request.method == "POST":
+        id_alumno = request.POST.get('alumno')
+        id_evaluacion = request.POST.get('evaluacion')
+        id_profesor = request.POST.get("profesor")
+        
+        nota_obtenida1 = request.POST.get('nota_obtenida1')
+        nota_obtenida2 = request.POST.get('nota_obtenida2')
+        nota_obtenida3 = request.POST.get('nota_obtenida3')
+        nota_obtenida4 = request.POST.get('nota_obtenida4')
+        nota_obtenida5 = request.POST.get('nota_obtenida5')
+        nota_obtenida6 = request.POST.get('nota_obtenida6')
+        nota_obtenida7 = request.POST.get('nota_obtenida7')
+        
+        alumno = Alumno.objects.get(pk=id_alumno)
+        evaluacion = Evaluacion.objects.get(pk=id_evaluacion)
+        profesor = Profesor.objects.get(pk=id_profesor)
+        nota = Nota.objects.create(
+            nota_obtenida1 = nota_obtenida1,
+            nota_obtenida2 = nota_obtenida2,
+            nota_obtenida3 = nota_obtenida3,
+            nota_obtenida4 = nota_obtenida4,
+            nota_obtenida5 = nota_obtenida5,
+            nota_obtenida6 = nota_obtenida6,
+            nota_obtenida7 = nota_obtenida7,
+            alumno = alumno,
+            evaluacion = evaluacion, 
+            profesor = profesor 
+        )
+        return redirect('ingreso_calificacion')
 #-----------------CONFIGURACIÓN DE COLEGIO------------------------------------
 

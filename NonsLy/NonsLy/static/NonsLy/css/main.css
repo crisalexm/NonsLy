@@ -612,3 +612,8 @@ body, html{
 		padding-left: 0;
 	}
 }
+
+input.nota {
+	width: 4;
+	height: 2;
+}
