@@ -38,7 +38,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#!" class="btn-exit-system">
+						<a href="{url 'logout'}" class="btn-exit-system">
 							<i class="zmdi zmdi-power"></i>
 						</a>
 					</li>
@@ -46,17 +46,21 @@
 			</div>
 			<!-- SideBar Menu -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-				
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Configuración Colegio <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="{%url 'configuracion_colegio'%}"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Datos de Colegio </a>
+						</li>
+					</ul>
+				</li>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-case zmdi-hc-fw"></i> Configuración Académica <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
-
-						<li>
-
-							<a href="{%url 'configuracion_periodo'%}"><i class="zmdi zmdi-timer zmdi-hc-fw"></i> Periodo Escolar </a>
-						</li>
 
 						<li>
 							<a href="{%url 'configuracion_nivel'%}"><i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Nivel Académico </a>
@@ -72,7 +76,9 @@
 							<a href="{%url 'configuracion_asignatura'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Asignaturas </a>
 						</li>
 						
-
+						<li>
+							<a href="{%url 'configuracion_evaluacion'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Evaluaciones </a>
+						</li>
 
 					</ul>
 				</li>
@@ -97,14 +103,15 @@
 				</li>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Configuración Colegio <i class="zmdi zmdi-caret-down pull-right"></i>
+						<i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Calificaciones <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="{%url 'configuracion_colegio'%}"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Datos de Colegio </a>
+							<a href="{%url 'ingreso_calificacion'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Calificaciones</a>
 						</li>
 					</ul>
 				</li>
+				
 			</ul>
 		</div>
 	</section>
@@ -141,15 +148,15 @@
 											{% csrf_token %}
 									    	<div class="form-group label-floating">
 											  <label class="control-label"> Código </label>
-											  <input class="form-control" type="text" name="codigo">
+											  <input class="form-control" type="text" name="codigo" required>
 											</div>
 									    	<div class="form-group label-floating">
 											  <label class="control-label">Nombre asignatura</label>
-											  <input class="form-control" type="text" name="nombre">
+											  <input class="form-control" type="text" name="nombre" required>
 											</div>
 									    	<div class="form-group label-floating">
 											  <label class="control-label">Curso</label>
-											  <select class="form-control" name="curso">
+											  <select class="form-control" name="curso" required>
 												{% for  curso in  cursos%}
 												<option value="{{curso.curso_id}}">{{curso.nombre}}</option>
 												{% endfor %}
@@ -186,7 +193,7 @@
 											<td>{{a.nombre}}</td>
 											<td>{{a.curso.nombre}}</td>
 											<td><a href="/gestionAcademica/edicion_asignatura/{{a.asig_id}}" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-											<td><a href="/gestionAcademica/eliminar_asignatura/{{a.asig_id}}" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
+											<td><a href="/gestionAcademica/eliminar_asignatura/{{a.asig_id}}" class="btn btn-danger btn-raised btn-xs btnEliminacion"><i class="zmdi zmdi-delete"></i></a></td>
 										</tr>
 										{% endfor %}
 									</tbody>
@@ -234,6 +241,7 @@
 <script src="{%static 'NonsLy/JQuery/ripples.min.js'%}"></script>
 <script src="{%static 'NonsLy/JQuery/jquery.mCustomScrollbar.concat.min.js'%}"></script>
 <script src="{%static 'NonsLy/JQuery/main.js'%}"></script>
+<script src="{%static 'NonsLy/JQuery/alerta.js'%}"></script>
 <script>
 	$.material.init();
 </script>

@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.template import Template, Context
 from django.template.loader import get_template
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from gestionAcademica.models import *
 from ast import Delete
@@ -31,7 +32,7 @@ def configuracion_nivel(request):
 def registra_nivel(request):
     if request.method == "POST":
         nombre = request.POST.get('nombre')
-        curso = Nivel.objects.create(
+        nivel = Nivel.objects.create(
             nombre = nombre,
         )
         return redirect('configuracion_nivel')  
@@ -89,13 +90,15 @@ def edicion_curso(request, curso_id):
     return render (request, 'gestionAcademica/configuracion_academica/edicion_curso.html', {"curso": curso, "niveles":niveles}) 
 
 def editar_curso(request):
+    id = int(request.POST.get('id'))
+    id_nivel= request.POST.get('nivel')
     nombre = request.POST.get('nombre')
     capacidad = request.POST.get('capacidad')
     annio_academico = request.POST.get('annio_academico')
-    id = int(request.POST.get('id'))
-    id_nivel= request.POST.get('nivel')
+    
     nivel=Nivel.objects.get(niv_id=id_nivel)
     curso = Curso.objects.get(curso_id=id) 
+    
     curso.nombre = nombre
     curso.capacidad = capacidad
     curso.annio_academico = annio_academico
@@ -431,9 +434,9 @@ def editar_apoderado(request):
         
 def eliminar_apoderado(self, apo_id):
     
-    profesor= Profesor.objects.filter(apo_id=apo_id).delete()
+    apoderado= Apoderado.objects.filter(apo_id=apo_id).delete()
     
-    if len(profesor)>0:
+    if len(apoderado)>0:
         datos={'message':"Success"}
     else:
         datos={"message":"Alumno not found"}
@@ -444,8 +447,13 @@ def eliminar_apoderado(self, apo_id):
 
 
 #-----------------CONFIGURACIÓN DE COLEGIO------------------------------------
-
+@login_required
 def configuracion_colegio(request):
+    
+    return render(request, 'gestionAcademica/configuracion_colegio/colegio.html', 
+                  {"colegios":Colegio.objects.all()})
+
+def registra_colegio(request):
     
     if request.method =="POST":
         nombre = request.POST.get("nombre")
@@ -459,12 +467,21 @@ def configuracion_colegio(request):
             direccion=direccion
         )
     
-        return render(request, 'gestionAcademica/configuracion_colegio/colegio.html' )
+        return redirect ('configuracion_colegio')
 
 def ingreso_calificacion(request):
+    promedio = 0
+    notas = Nota.objects.all()
+    for nota in notas:
+        promedio+=nota.nota_obtenida1
+    
+    if len(notas) == 0:
+        promedio = '0'
+    else:
+        promedio = promedio/len(notas)
     
     return render(request, 'gestionAcademica/configuracion_academica/ingresaCalificacion.html',
-                    {
+                    {   "promedio":promedio,
                         "notas": Nota.objects.all(),
                         "alumnos": Alumno.objects.all(),
                         "profesores": Profesor.objects.all(), 
@@ -477,29 +494,136 @@ def registra_nota(request):
         id_evaluacion = request.POST.get('evaluacion')
         id_profesor = request.POST.get("profesor")
         
-        nota_obtenida1 = request.POST.get('nota_obtenida1')
-        nota_obtenida2 = request.POST.get('nota_obtenida2')
-        nota_obtenida3 = request.POST.get('nota_obtenida3')
-        nota_obtenida4 = request.POST.get('nota_obtenida4')
-        nota_obtenida5 = request.POST.get('nota_obtenida5')
-        nota_obtenida6 = request.POST.get('nota_obtenida6')
-        nota_obtenida7 = request.POST.get('nota_obtenida7')
+
         
+        
+        nota_obtenida1 = request.POST.get('nota_obtenida1')
+        
+        if nota_obtenida1 == '':
+            nota_obtenida1 = 0.00
+            print('Aqui ->',nota_obtenida1)
+            
+        nota_obtenida1_float = float(nota_obtenida1)
         alumno = Alumno.objects.get(pk=id_alumno)
         evaluacion = Evaluacion.objects.get(pk=id_evaluacion)
         profesor = Profesor.objects.get(pk=id_profesor)
         nota = Nota.objects.create(
-            nota_obtenida1 = nota_obtenida1,
-            nota_obtenida2 = nota_obtenida2,
-            nota_obtenida3 = nota_obtenida3,
-            nota_obtenida4 = nota_obtenida4,
-            nota_obtenida5 = nota_obtenida5,
-            nota_obtenida6 = nota_obtenida6,
-            nota_obtenida7 = nota_obtenida7,
+            nota_obtenida1 = nota_obtenida1_float,
             alumno = alumno,
             evaluacion = evaluacion, 
             profesor = profesor 
         )
         return redirect('ingreso_calificacion')
+
+def edicion_nota(request,nota_id): 
+    nota = Nota.objects.filter(nota_id=nota_id).first()
+    alumnos = Alumno.objects.all()
+    profesores = Profesor.objects.all()
+    evaluaciones = Evaluacion.objects.all()
+    return render (request, 'gestionAcademica/configuracion_academica/editar_nota.html', {
+        "nota": nota,
+        "alumnos":alumnos,
+        "profesores":profesores,
+        "evaluaciones":evaluaciones
+    }) 
+
+def editar_nota(request):
+    if request.method== "POST":
+        id = int(request.POST.get('id'))
+        id_alumno = request.POST.get('alumno')
+        id_profesor =request.POST.get('profesor')
+        id_evaluacion = request.POST.get('evaluacion')
+        nota_obtenida1 = request.POST.get('nota_obtenida1')
+        
+        if nota_obtenida1 == '':
+            nota_obtenida1 = 0.00
+            print('Aqui ->',nota_obtenida1)
+
+        nota_obtenida1_float = float(nota_obtenida1)
+        
+        nota = Nota.objects.get(pk=id)
+        alumno = Alumno.objects.get(pk=id_alumno)
+        profesor = Profesor.objects.get(pk=id_profesor)
+        evaluacion = Evaluacion.objects.get(pk=id_evaluacion)
+        
+        nota.alumno = alumno
+        nota.profesor = profesor
+        nota.evaluacion = evaluacion
+        nota.nota_obtenida1 = nota_obtenida1_float 
+        nota.save()
+        
+        return redirect('ingreso_calificacion')
+    
+def eliminar_nota(self, nota_id):
+    nota= Nota.objects.filter(nota_id=nota_id).delete()
+    
+    if len(nota)>0:
+        datos={'message':"Success"}
+    else:
+        datos={"message":"Alumno not found"}
+    
+    return redirect('ingreso_calificacion')
+
+def configuracion_evaluacion(request):
+    evaluaciones = Evaluacion.objects.all()
+    asignaturas = Asignatura.objects.all()
+    
+    return render(request, 'gestionAcademica/configuracion_academica/evaluacion.html',
+                    {
+                        "evaluaciones": evaluaciones,
+                        "asignaturas": asignaturas
+                    })
+    
+def registra_evaluacion(request):
+    if request.method == "POST":
+        nombre = request.POST.get('nombre')
+        fecha = request.POST.get('fecha')
+        id_asignatura = request.POST.get('asignatura')
+        
+        asignatura = Asignatura.objects.get(pk=id_asignatura)
+        
+        evaluacion = Evaluacion.objects.create(
+            nombre = nombre,
+            fecha = fecha,
+            asignatura = asignatura
+        )
+        
+        return redirect('configuracion_evaluacion')
+
+def edicion_evaluacion(request, eva_id):
+    evaluacion = Evaluacion.objects.filter(eva_id=eva_id).first()
+    asignaturas = Asignatura.objects.all()
+    
+    return render (request, 'gestionAcademica/configuracion_academica/editar_evaluacion.html', {
+        "evaluacion": evaluacion,
+        "asignaturas":asignaturas,
+    }) 
+    
+def editar_evaluacion(request):
+    if request.method == "POST":
+        id= int(request.POST.get('id'))
+        id_asignatura = request.POST.get('asignatura')
+        nombre = request.POST.get('nombre')
+        fecha= request.POST.get('fecha')
+        
+        asignatura = Asignatura.objects.get(pk=id_asignatura)
+        evaluacion = Evaluacion.objects.get(eva_id=id)
+        
+        evaluacion.nombre = nombre
+        evaluacion.fecha = fecha
+        evaluacion.asignatura = asignatura
+        evaluacion.save()
+        
+        return redirect("configuracion_evaluacion")
+    
+def eliminar_evaluacion(request, eva_id):
+    evaluacion= Evaluacion.objects.filter(eva_id=eva_id).delete()
+    
+    if len(evaluacion)>0:
+        datos={'message':"Success"}
+    else:
+        datos={"message":"Alumno not found"}
+    
+    return redirect('configuracion_evaluacion')
 #-----------------CONFIGURACIÓN DE COLEGIO------------------------------------
 

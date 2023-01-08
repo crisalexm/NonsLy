@@ -29,7 +29,7 @@
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
 					<img src="{%static 'NonsLy/img/avatar.jpg'%}" alt="UserIcon">
-					<figcaption class="text-center text-titles">Non-stop-learning</figcaption>
+					<figcaption class="text-center text-titles">{{user.username | upper}}</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li>
@@ -46,7 +46,16 @@
 			</div>
 			<!-- SideBar Menu -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-				
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i>CONFIGURACIÓN COLEGIO <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="{%url 'configuracion_colegio'%}"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Datos de Colegio</a>
+						</li>
+					</ul>
+				</li>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-case zmdi-hc-fw"></i>CONFIGURACIÓN ACADÉMICA <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -73,7 +82,6 @@
 						</li>
 						
 
-
 					</ul>
 				</li>
 				<li>
@@ -97,11 +105,11 @@
 				</li>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i>CONFIGURACIÓN COLEGIO <i class="zmdi zmdi-caret-down pull-right"></i>
+						<i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Calificaciones <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="{%url 'configuracion_colegio'%}"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Datos de Colegio</a>
+							<a href="{%url 'ingreso_calificacion'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Calificaciones</a>
 						</li>
 					</ul>
 				</li>
@@ -128,146 +136,6 @@
 		</div>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xs-12">
-					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-					  	<li class="active"><a href="#new" data-toggle="tab">Nuevo registro</a></li>
-					  	<li><a href="#list" data-toggle="tab">Ver lista</a></li>
-					</ul>
-					<div id="myTabContent" class="tab-content">
-						<div class="tab-pane fade active in" id="new">
-							<div class="container-fluid">
-								<div class="row">
-									<div class="col-xs-12 col-md-10 col-md-offset-1">
-									    <form action="/administracion/" method="POST">{% csrf_token %}
-									    	<div class="form-group label-floating">
-											  <label class="control-label">Nombres</label>
-											  <input class="form-control" type="text" name="nombre"> 
-											</div>
-											<div class="form-group label-floating">
-											  <label class="control-label">Apellido Paterno</label>
-											  <input class="form-control" type="text" name="apellido1">
-											</div>
-											<div class="form-group label-floating">
-											  <label class="control-label">Apellido Materno</label>
-											  <input class="form-control" type="text" name="apellido2">
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">Rut</label>
-												<input class="form-control" type="text" name="rut">
-											  </div>
-
-											<div class="form-group label-floating">
-											  <label class="control-label">Fecha de nacimiento</label>
-											  <input class="form-control" type="text" name="fecha_nacimiento">
-											</div>
-											<div class="form-group label-floating">
-											  <label class="control-label">Teléfono</label>
-											  <input class="form-control" type="text" name="telefono">
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Genero</label>
-												<input class="form-control" type="text" name="genero">
-											  </div>
-
-											  <div class="form-group label-floating">
-												<label class="control-label">Especialidad</label>
-												<input class="form-control" type="text" name="especialidad">
-											  </div>
-										    <p class="text-center">
-										    	<button href="#!" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Guardar</button>
-										    </p>
-									    </form>
-									</div>
-								</div>
-							</div>
-						</div>
-					  	<div class="tab-pane fade" id="list">
-							<div class="table-responsive">
-								<table class="table table-hover text-center">
-									<thead>
-										<tr>
-											<th class="text-center">Nombre</th>
-											<th class="text-center">Apellido Paterno</th>
-											<th class="text-center">Apellido Materno</th>
-											<th class="text-center">Rut</th>
-											<th class="text-center">Fecha de nacimiento</th>
-											<th class="text-center">Teléfono</th>
-											<th class="text-center">Genero</th>
-											<th class="text-center">Especialidad</th>
-											<th class="text-center">Modificar</th>
-											<th class="text-center">Eliminar</th>
-										</tr>
-									</thead>
-									<tbody>
-{% comment %} 										{%for i in profesor%}
-										<tr>
-											<td>{{i.nombre}}</td>
-											<td>{{i.apellido1}}</td>
-											<td>{{i.apellido2}}</td>
-											<td>{{i.rut}}</td>
-											<td>{{i.fecha_nacimiento}}</td>
-											<td>{{i.telefono}}</td>
-											<td>{{i.genero}}</td>
-											<td>{{i.especialidad}}</td>
-   										    <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-											<td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>											
-										</tr>
-										{% endfor %} {% endcomment %}
-										<tr>
-											<td>1</td>
-											<td>Carlos</td>
-											<td>Alfaro</td>
-											<td>Alfaro</td>
-											<td>153340617</td>
-											<td>27-03-1981</td>
-											<td>7555555</td>
-											<td>M</td>
-											<td>Docente</td>
-											<td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-											<td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-										</tr>
-											<tr>
-												<td>1</td>
-												<td>Carlos</td>
-												<td>Alfaro</td>
-												<td>Alfaro</td>
-												<td>153340617</td>
-												<td>27-03-1981</td>
-												<td>7555555</td>
-												<td>M</td>
-												<td>Docente</td>
-												<td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-												<td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-											</tr>	
-										<tr>
-											<td>1</td>
-											<td>Carlos</td>
-											<td>Alfaro</td>
-											<td>Alfaro</td>
-											<td>153340617</td>
-											<td>27-03-1981</td>
-											<td>7555555</td>
-											<td>M</td>
-											<td>Docente</td>
-											<td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-											<td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
-										</tr>
-									</tbody>
-								</table>
-								<ul class="pagination pagination-sm">
-								  	<li class="disabled"><a href="#!">«</a></li>
-								  	<li class="active"><a href="#!">1</a></li>
-								  	<li><a href="#!">2</a></li>
-								  	<li><a href="#!">3</a></li>
-								  	<li><a href="#!">4</a></li>
-								  	<li><a href="#!">5</a></li>
-								  	<li><a href="#!">»</a></li>
-								</ul>
-							</div>
-					  	</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</section>
@@ -278,7 +146,7 @@
 <script src="{%static 'NonsLy/JQuery/material.min.js'%}"></script>
 <script src="{%static 'NonsLy/JQuery/ripples.min.js'%}"></script>
 <script src="{%static 'NonsLy/JQuery/jquery.mCustomScrollbar.concat.min.js'%}"></script>
-<script src="{%static 'NonsLy/JQuery/main.js'%}"></script>
+<script src="{%static 'NonsLy/JQuery/main.js'%} " type="module" ></script>
 <script>
 	$.material.init();
 </script>

@@ -43,23 +43,21 @@
 			</div>
 			<!-- SideBar Menu -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-				
 				<li>
-					<a href="{%url 'ingreso_calificacion'%}" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-case zmdi-hc-fw"></i> Mis Asignaturas<i class=""></i>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Configuración Colegio <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
-					
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="{%url 'configuracion_colegio'%}"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Datos de Colegio </a>
+						</li>
+					</ul>
 				</li>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-case zmdi-hc-fw"></i> Configuración Académica <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
-
-						<li>
-
-							<a href="{%url 'configuracion_periodo'%}"><i class="zmdi zmdi-timer zmdi-hc-fw"></i> Periodo Escolar </a>
-						</li>
 
 						<li>
 							<a href="{%url 'configuracion_nivel'%}"><i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Nivel Académico </a>
@@ -75,8 +73,8 @@
 							<a href="{%url 'configuracion_asignatura'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Asignaturas </a>
 						</li>
 						
-
-
+						<li>
+							<a href="{%url 'configuracion_evaluacion'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Evaluaciones </a>
 					</ul>
 				</li>				
 				<li>
@@ -100,11 +98,11 @@
 				</li>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Configuración Colegio <i class="zmdi zmdi-caret-down pull-right"></i>
+						<i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Calificaciones <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="{%url 'configuracion_colegio'%}"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Datos de Colegio </a>
+							<a href="{%url 'ingreso_calificacion'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Calificaciones</a>
 						</li>
 					</ul>
 				</li>
@@ -145,7 +143,7 @@
 											{%csrf_token%}
 											<div class="form-group">
 												<label class="control-label">Alumno</label>
-												<select class="form-control" name="alumno">
+												<select class="form-control" name="alumno"required>
 												  {% for  alumno in  alumnos%}
 												  <option value="{{alumno.alum_id}}">{{alumno.nombre}}</option>
 												  {% endfor %}
@@ -153,7 +151,7 @@
 											</div>
 											<div class="form-group">
 												<label class="control-label">Profesor</label>
-												<select class="form-control" name="profesor">
+												<select class="form-control" name="profesor"required>
 												  {% for  profesor in  profesores%}
 												  <option value="{{profesor.prof_id}}">{{profesor.nombre}}</option>
 												  {% endfor %}
@@ -161,44 +159,15 @@
 											</div>
 											<div class="form-group">
 												<label class="control-label">Evaluacion</label>
-												<select class="form-control" name="evaluacion">
+												<select class="form-control" name="evaluacion"required>
 												  {% for  evaluacion in  evaluaciones%}
-												  <option value="{{evaluacion.eva_id}}">{{evaluacion.nombre}}</option>
+												  <option value="{{evaluacion.eva_id}}">{{evaluacion.nombre}} - Asignatura: {{evaluacion.asignatura.nombre}}</option>
 												  {% endfor %}
 												</select>
 											</div>
 									    	<div class="form-group label-floating">
-											  <label class="control-label"> Nota °1 </label>
-											  <input class="form-control" type="number" name="nota_obtenida1" step="any" min="1" max ="7">
-											</div>
-											<div class="form-group label-floating">
-											  <label class="control-label"> Nota °2 </label>
-											  <input class="form-control" type="number" name="nota_obtenida2" step="any" min="1" max ="7">
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label"> Nota °3 </label>
-												<input class="form-control" type="number" name="nota_obtenida3" step="any" min="1" max ="7">
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label"> Nota °4 </label>
-												<input class="form-control" type="number"  name="nota_obtenida4" step="any" min="1" max ="7">
-											</div>
-										
-											<div class="form-group label-floating">
-												<label class="control-label"> Nota °5</label>
-												<input class="form-control" type="number" name="nota_obtenida5" step="any" min="1" max ="7">
-											  </div>
-
-											<div class="form-group label-floating">
-												<label class="control-label"> Nota °6 </label>
-												<input class="form-control" type="number" name="nota_obtenida6" step="any" min="1" max ="7">
-											</div>
-											
-											<div class="form-group label-floating">
-												<label class="control-label"> Nota °7</label>
-												<input class="form-control" type="number" name="nota_obtenida7" step="any" min="1" max ="7">
+											  <label class="control-label"> Nota obtenida</label>
+											  <input class="form-control" type="number" name="nota_obtenida1" step="any" min="1" max ="7"required>
 											</div>
 										    <p class="text-center">
 										    	<button href="#!" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Guardar </button>
@@ -215,31 +184,33 @@
 										<tr>
 											<th class="text-center">Alumno</th>
 											<th class="text-center">Evaluacion</th>
-											<th class="text-center">N1</th>
-											<th class="text-center">N2</th>
-											<th class="text-center">N3</th>
-											<th class="text-center">N4</th>
-											<th class="text-center">N5</th>
-											<th class="text-center">N6</th>
-											<th class="text-center">N7</th>
-											<th class="text-center">Promedio</th>
+											<th class="text-center">Nota Obtenida</th>
+											<th class="text-center">Asignatura</th>
+											<th class="text-center">Editar</th>
+											<th class="text-center">Eliminar</th>
 										</tr>
 									</thead>
 									<tbody>
 										{% for nota in notas %}
 										</tr>
-											<td>{{nota.alumno.nombre}} {{n.alumno.apellido1}} </td>
+											<td>{{nota.alumno.nombre}} {{nota.alumno.apellido1}} </td>
 											<td>{{nota.evaluacion}}</td>
 											<td>{{nota.nota_obtenida1}}</td>
-											<td>{{nota.nota_obtenida2}}0</td>
-											<td>{{nota.nota_obtenida3}}</td>
-											<td>{{nota.nota_obtenida4}}</td>
-											<td>{{nota.nota_obtenida5}}</td>
-											<td>{{nota.nota_obtenida6}}</td>
-											<td>{{nota.nota_obtenida7}}</td>
+											<td>{{nota.evaluacion.asignatura}}</td>
+											
+											
+											<td><a href="/gestionAcademica/edicion_nota/{{nota.nota_id}}" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+											<td><a href="/gestionAcademica/eliminar_nota/{{nota.nota_id}}" class="btn btn-danger btn-raised btn-xs btnEliminacion"><i class="zmdi zmdi-delete"></i></a></td>
 										</tr>
 										{% endfor %}
 									</tbody>
+									<thead>
+										<tr>
+											<th class="text-start">Promedio</th>
+											<th class="text-center"></th>
+											<th class="text-center">{{promedio}}</th>
+										</tr>
+									</thead>
 								</table>
 								<ul class="pagination pagination-sm">
 								  	<li class="disabled"><a href="#!">«</a></li>
@@ -265,6 +236,7 @@
 <script src="{%static 'NonsLy/JQuery/ripples.min.js'%}"></script>
 <script src="{%static 'NonsLy/JQuery/jquery.mCustomScrollbar.concat.min.js'%}"></script>
 <script src="{%static 'NonsLy/JQuery/main.js'%}"></script>
+<script src="{%static 'NonsLy/JQuery/alerta.js'%}"></script>
 <script>
 	$.material.init();
 </script>

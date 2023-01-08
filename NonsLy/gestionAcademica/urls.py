@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import path, include
 from gestionAcademica import views
-
-
+from Website import views as v_web
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 urlpatterns = [
 
     path('configuracion_periodo/', views.configuracion_periodo, name='configuracion_periodo'),
@@ -44,12 +45,23 @@ urlpatterns = [
     path('eliminar_apoderado/<apo_id>', views.eliminar_apoderado, name='eliminar_apoderado'),
     path('edicion_apoderado/<apo_id>', views.edicion_apoderado, name='edicion_apoderado'),
     path('editar_apoderado/', views.editar_apoderado, name='editar_apoderado'),
-#-----------------CONFIGURACIÓN DE USUARIOS /------------------------------------
+#--------------------------------- CONFIGURACIÓN DE USUARIOS /------------------------------------
 
 #---------------------------------CONFIGURACIÓN NOTAS ---------------------------
     path('ingreso_calificacion/', views.ingreso_calificacion,name ='ingreso_calificacion'),
     path('registra_nota/', views.registra_nota,name ='registra_nota'),
+    path('eliminar_nota/<nota_id>', views.eliminar_nota,name ='eliminar_nota'),
+    path('edicion_nota/<nota_id>', views.edicion_nota,name ='edicion_nota'),
+    path('editar_nota/', views.editar_nota,name ='editar_nota'),
 
+    path('configuracion_evaluacion/', views.configuracion_evaluacion ,name ='configuracion_evaluacion'),
+    path('registra_evaluacion/', views.registra_evaluacion, name ='registra_evaluacion'),
+    path('eliminar_evaluacion/<eva_id>', views.eliminar_evaluacion, name ='eliminar_evaluacion'),
+    path('edicion_evaluacion/<eva_id>', views.edicion_evaluacion,name ='edicion_evaluacion'),
+    path('editar_evaluacion/', views.editar_evaluacion,name ='editar_evaluacion'),
+    
     path('configuracion_colegio/', views.configuracion_colegio, name='configuracion_colegio'),
-
+    path('registra_colegio/', views.registra_colegio, name='registra_colegio'),
+    #path('accounts/logout/', auth_views.LogoutView.as_view(template_name='Website/login/login.html'),  name='logout'),
+    #path('', include('Website.urls')),
 ]

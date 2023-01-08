@@ -46,17 +46,21 @@
 			</div>
 			<!-- SideBar Menu -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-				
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Configuración Colegio <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="{%url 'configuracion_colegio'%}"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Datos de Colegio </a>
+						</li>
+					</ul>
+				</li>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-case zmdi-hc-fw"></i> Configuración Académica <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
-
-						<li>
-
-							<a href="{%url 'configuracion_periodo'%}"><i class="zmdi zmdi-timer zmdi-hc-fw"></i> Periodo Escolar </a>
-						</li>
 
 						<li>
 							<a href="{%url 'configuracion_nivel'%}"><i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Nivel Académico </a>
@@ -72,8 +76,9 @@
 							<a href="{%url 'configuracion_asignatura'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Asignaturas </a>
 						</li>
 						
-
-
+						<li>
+							<a href="{%url 'configuracion_evaluacion'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Evaluaciones </a>
+						</li>
 					</ul>
 				</li>
 				<li>
@@ -97,11 +102,11 @@
 				</li>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Configuración Colegio <i class="zmdi zmdi-caret-down pull-right"></i>
+						<i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Calificaciones <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="{%url 'configuracion_colegio'%}"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Datos de Colegio </a>
+							<a href="{%url 'ingreso_calificacion'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Calificaciones</a>
 						</li>
 					</ul>
 				</li>
@@ -129,8 +134,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-					  	<li class="active"><a href="#new" data-toggle="tab"> Nueva Asignatura </a></li>
-					  	<li><a href="#list" data-toggle="tab"> Lista de Asignaturas </a></li>
+					  	<li class="active"><a href="#new" data-toggle="tab">Edición de datos</a></li>
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
@@ -141,16 +145,16 @@
 											{% csrf_token %}
 									    	<div class="form-group label-floating">
 											  <label class="control-label"> Código </label>
-											  <input class="form-control" type="text" name="codigo" value="{{asignatura.codigo}}">
+											  <input class="form-control" type="text" name="codigo" value="{{asignatura.codigo}}"required>
 											  <input type="hidden" name="id" value="{{asignatura.asig_id}}">
 											</div>
 									    	<div class="form-group label-floating">
 											  <label class="control-label">Nombre asignatura</label>
-											  <input class="form-control" type="text" name="nombre" value="{{asignatura.nombre}}">
+											  <input class="form-control" type="text" name="nombre" value="{{asignatura.nombre}}"required>
 											</div>
 									    	<div class="form-group label-floating">
 											  <label class="control-label">Curso</label>
-											  <select class="form-control" name="curso">
+											  <select class="form-control" name="curso"required>
 												{% for  curso in  cursos%}
 												<option value="{{curso.curso_id}}">{{curso.nombre}}</option>
 												{% endfor %}
@@ -197,6 +201,7 @@
 <script src="{%static 'NonsLy/JQuery/ripples.min.js'%}"></script>
 <script src="{%static 'NonsLy/JQuery/jquery.mCustomScrollbar.concat.min.js'%}"></script>
 <script src="{%static 'NonsLy/JQuery/main.js'%}"></script>
+<script src="{%static 'NonsLy/JQuery/alerta.js'%}"></script>
 <script>
 	$.material.init();
 </script>

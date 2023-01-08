@@ -31,16 +31,17 @@
                 </div>
                 <h2 class="fw-bold text-center py-5">Bienvenido</h2>
                 <!-- LOGIN -->
-                <form action="/buscar/" method="GET" id="form">
+                <form method="POST" id="form">
+                    {% csrf_token %}
                     <div class="col-12">
-                        <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="text" class="form-control" id="email" name="correo" placeholder="example@nonsly.com">
+                        <label for="email" class="form-label">Usuario</label>
+                        <input type="text" class="form-control" id="id_username" name="username">
                         <p></p>
                         <br>
                     </div>
                     <div class="col-12">
                         <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="contrasena" placeholder="Al menos 8 carácteres">
+                        <input type="password" class="form-control" id="id_password" name="password">
                         <p></p>
                         <br>
                     </div>
@@ -50,17 +51,17 @@
                     </div>
                     <div class="d-grid">    <!-- d-grid permite que el boton se expanda todo el ancho de página -->
                         <button type="submit" class="btn btn-primary">Iniciar Sesión</button> <br>
-                        
+{% comment %}                         
                     </div>
                     <div class="my-3">
                         <span>No tienes cuenta? <a href="#"> Regístrate</a></span><br>
                         <span><a href="#">Recuperar Contraseña</a></span>
-                    </div>
+                    </div> {% endcomment %}
                 </form>
 
 
                 <!-- LOGIN  REDES SOCIALES-->
-                <div class="container w-100 my-5">
+                {% comment %} <div class="container w-100 my-5">
                     <div class="row text-center">
                         <div class="col-12">Ó</div>
                     </div>
@@ -90,7 +91,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
 
@@ -110,7 +111,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     -->
     <script src="{%static 'NonsLy/JQuery/jquery-3.6.0.min.js'%}" type="module"></script>
-    <script src="{%static 'NonsLy/js/login_js/validacionLog.js'%}" type="module"></script>
+    {% comment %} <script src="{%static 'NonsLy/js/login_js/validacionLog.js'%}" type="module"></script> {% endcomment %}
 
   </body>
 </html>

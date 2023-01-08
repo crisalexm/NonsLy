@@ -46,6 +46,16 @@
 			</div>
 			<!-- SideBar Menu -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Configuración Colegio <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="{%url 'configuracion_colegio'%}"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Datos de colegio </a>
+						</li>
+					</ul>
+				</li>
 				
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
@@ -53,16 +63,16 @@
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="{%url 'configuracion_periodo'%}"><i class="zmdi zmdi-timer zmdi-hc-fw"></i> Periodo Escolar </a>
+							<a href="{%url 'configuracion_nivel'%} "><i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Nivel </a>
 						</li>
 						<li>
-							<a href="{%url 'configuracion_nivel'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Asignaturas </a>
+							<a href="{%url 'configuracion_curso'%} "><i class="zmdi zmdi-font zmdi-hc-fw"></i> Cursos </a>
 						</li>
 						<li>
-							<a href="{%url 'configuracion_curso'%}"><i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Nivel </a>
+							<a href="{%url 'configuracion_asignatura'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Asignaturas </a>
 						</li>
 						<li>
-							<a href="{%url 'configuracion_asignatura'%}"><i class="zmdi zmdi-font zmdi-hc-fw"></i> Cursos </a>
+							<a href="{%url 'configuracion_evaluacion'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Evaluaciones </a>
 						</li>
 					</ul>
 				</li>
@@ -87,11 +97,11 @@
 				</li>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Configuración Colegio <i class="zmdi zmdi-caret-down pull-right"></i>
+						<i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Calificaciones <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="{%url 'configuracion_colegio'%}"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Datos de colegio </a>
+							<a href="{%url 'ingreso_calificacion'%}"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Calificaciones</a>
 						</li>
 					</ul>
 				</li>
@@ -120,8 +130,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-					  	<li class="active"><a href="#new" data-toggle="tab"> Nuevo Apoderado</a></li>
-					  	<li><a href="#list" data-toggle="tab"> Lista de Apoderados</a></li>
+					  	<li class="active"><a href="#new" data-toggle="tab"> Edición de datos</a></li>
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
@@ -132,12 +141,12 @@
 											{%csrf_token%}
 									    	<div class="form-group label-floating">
 											  <label class="control-label"> Nombre </label>
-											  <input class="form-control" type="text" name="nombre" value="{{apoderado.nombre}}">
+											  <input class="form-control" type="text" name="nombre" value="{{apoderado.nombre}}" required>
 											  <input type="hidden" name="id" value="{{apoderado.apo_id}}">
 											</div>
 											<div class="form-group label-floating">
 											  <label class="control-label"> Apellido Parterno </label>
-											  <input class="form-control" type="text" name="apellido1" value="{{apoderado.apellido1}}">
+											  <input class="form-control" type="text" name="apellido1" value="{{apoderado.apellido1}}" required>
 											</div>
 
 											<div class="form-group label-floating">
@@ -147,7 +156,7 @@
 
 											<div class="form-group label-floating">
 												<label class="control-label"> Rut </label>
-												<input class="form-control" type="text"  name="rut" value="{{apoderado.rut}}">
+												<input class="form-control" type="text" id="rut"  name="rut" value="{{apoderado.rut}}" oninput="checkRut(this)" required>
 											</div>
 										
 											<div class="form-group">
@@ -157,12 +166,12 @@
 
 											<div class="form-group label-floating">
 												<label class="control-label"> Teléfono </label>
-												<input class="form-control" type="number" name="telefono" value="{{apoderado.telefono}}">
+												<input class="form-control" type="number" name="telefono" value="{{apoderado.telefono}}" required>
 											</div>
 											
 											<div class="form-group">
 												<label class="control-label"> Email</label>
-												<input class="form-control" type="email" name="email" value="{{apoderado.email}}">
+												<input class="form-control" type="email" name="email" value="{{apoderado.email}}" required>
 											</div>
 
 											<div class="form-group">
@@ -176,13 +185,14 @@
 											<div class="form-group">
 												<label>Hijos</label>
 												{% for alumno in  alumnos %}
-												<input type="checkbox" name="{{alumno.nombre}}" value="{{alumno.alum_id}}"> {{alumno.nombre}}
+												<input type="checkbox" name="{{alumno.nombre}}" value="{{alumno.alum_id}}" required> {{alumno.nombre}}
 												{% endfor %}
 											</div>
 
 										    <p class="text-center">
 										    	<button href="#!" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Guardar </button>
-										    </p>
+												<script src="{%static 'NonsLy/JQuery/validarRUT.js'%}"></script>
+											</p>
 									    </form>
 									</div>
 								</div>

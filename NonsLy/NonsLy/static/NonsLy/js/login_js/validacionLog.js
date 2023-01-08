@@ -1,5 +1,5 @@
 window.addEventListener("load", ()=>{
-    const email = document.getElementById("email");
+    //const email = document.getElementById("email");
     const password = document.getElementById("password");
     const form = document.getElementById("form");
 
@@ -9,17 +9,17 @@ window.addEventListener("load", ()=>{
     
     })
     const validaCampos = () =>{
-        const emailValor = email.value.trim();
+        //const emailValor = email.value.trim();
         const passwordValor = password.value.trim();
 
-        if(emailValor == ""){
+/*         if(emailValor == ""){
             validaFalla(email, "Campo vacío")
             console.log(email)
         }else if(!validaEmail(emailValor)){
             validaFalla(email, "El e-mail no es válido")
         }else{
             validaOk(email)
-        }
+        } */
 
         if(passwordValor === ""){
              validaFalla(password, "Campo vacío")
@@ -41,8 +41,8 @@ window.addEventListener("load", ()=>{
         formControl.className = "col-12 ok"
     }
 
-    const validaEmail = (email) => {
+/*     const validaEmail = (email) => {
         return /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(email);
-    } 
+    }  */
 })
 

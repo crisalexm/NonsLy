@@ -177,7 +177,7 @@ class Asignatura(models.Model):
     nombre = models.CharField(max_length=50)
     codigo=models.CharField(max_length=5,unique=True)
     
-    curso=models.ForeignKey(Curso, models.DO_NOTHING)
+    curso=models.ForeignKey(Curso, models.CASCADE)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
@@ -209,7 +209,7 @@ class Evaluacion(models.Model):
     nombre = models.CharField(max_length=50)
     fecha = models.DateTimeField()
     
-    asignatura = models.ForeignKey(Asignatura, models.DO_NOTHING)
+    asignatura = models.ForeignKey(Asignatura, models.CASCADE)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
@@ -240,16 +240,11 @@ class Clase(models.Model):
 class Nota(models.Model):
     nota_id = models.AutoField(primary_key=True)
     nota_obtenida1 = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
-    nota_obtenida2 = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
-    nota_obtenida3 = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
-    nota_obtenida4 = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
-    nota_obtenida5 = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
-    nota_obtenida6 = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
-    nota_obtenida7 = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
+    promedio = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)  
     
-    alumno = models.ForeignKey(Alumno, models.DO_NOTHING)
-    profesor = models.ForeignKey(Profesor, models.DO_NOTHING)
-    evaluacion = models.ForeignKey(Evaluacion, models.DO_NOTHING)
+    alumno = models.ForeignKey(Alumno, models.CASCADE)
+    profesor = models.ForeignKey(Profesor, models.SET_NULL, null=True)
+    evaluacion = models.ForeignKey(Evaluacion, models.CASCADE)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)

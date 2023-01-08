@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 def index(request):
@@ -8,6 +8,10 @@ def index(request):
 def login(request):
 
     return render(request,'Website/login/login.html')
+
+def logout(request):
+
+    return redirect('login')
 
 def soporte(request):
     
